@@ -1,3 +1,4 @@
+import map from 'lodash/map';
 import set from 'lodash/set';
 import 'moment';
 
@@ -46,6 +47,18 @@ export default class Notifications {
         set(notification, 'updating', false);
         return notification;
       });
+  }
+
+  readAllNotifications(notifications) {
+    return this.$q.all(
+      map(notifications, (notification) => {
+        if (!notification.updating) {
+          return this.readNotifications(notification, 'acknowledged');
+        }
+
+        return this.$q.when();
+      }),
+    );
   }
 
   toggleSublinkAction(toUpdate, linkClicked) {
