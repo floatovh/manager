@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@ovh-ux/component-rollup-config": "^7.0.0",
-    "@ovh-ux/ui-kit": "^4.1.9",
+    "@ovh-ux/ui-kit": "^4.1.10",
     "bootstrap": "~3.3.7"
   },
   "peerDependencies": {
@@ -32,7 +32,7 @@
     "@ovh-ux/ng-ovh-telecom-universe-components": "^5.0.0 || ^6.0.0",
     "@ovh-ux/ng-ovh-ui-confirm-modal": "^2.0.0",
     "@ovh-ux/ng-pagination-front": "^9.0.1",
-    "@ovh-ux/ui-kit": "^4.1.9",
+    "@ovh-ux/ui-kit": "^4.1.10",
     "@uirouter/angularjs": "^1.0.15",
     "angular": "^1.7.5",
     "angular-messages": "^1.7.6",

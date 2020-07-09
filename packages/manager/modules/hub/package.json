@@ -15,7 +15,7 @@
     "@ovh-ux/manager-models": "^1.0.0"
   },
   "devDependencies": {
-    "@ovh-ux/ui-kit": "^4.1.9",
+    "@ovh-ux/ui-kit": "^4.1.10",
     "bootstrap": "^4.4.1",
     "lodash-es": "^4.17.15"
   },
@@ -29,7 +29,7 @@
     "@ovh-ux/ng-ovh-sso-auth": "^4.2.3",
     "@ovh-ux/ng-ovh-swimming-poll": "^5.0.1",
     "@ovh-ux/ng-translate-async-loader": "^2.1.0",
-    "@ovh-ux/ui-kit": "^4.1.9",
+    "@ovh-ux/ui-kit": "^4.1.10",
     "@uirouter/angularjs": "^1.0.23",
     "angular": "^1.7.5",
     "angular-translate": "^2.18.1",
