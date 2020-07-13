@@ -279,20 +279,43 @@ export const IPLB_CONFIG = {
   regions: ['EU', 'CA'],
 };
 
-export const VRACK_CONFIG = {
-  id: 'vrack',
-  loadOnState: 'vrack',
-  types: [
-    {
-      path: '/vrack',
-      state: 'vrack',
-      stateParams: ['vrackId'],
-      app: [DEDICATED],
-    },
-  ],
-  icon: 'ovh-font ovh-font-vRack',
+export const DEDICATED_NETWORK_CONFIG = {
+  id: 'dedicated_network',
+  forceDisplaySearch: true,
   app: [DEDICATED],
   regions: ['EU', 'CA', 'US'],
+  children: [
+    {
+      id: 'vrack',
+      loadOnState: 'vrack',
+      types: [
+        {
+          path: '/vrack',
+          state: 'vrack',
+          stateParams: ['vrackId'],
+          app: [DEDICATED],
+        },
+      ],
+      icon: 'ovh-font ovh-font-vRack',
+      app: [DEDICATED],
+      regions: ['EU', 'CA', 'US'],
+    },
+    {
+      id: 'cloud_connect',
+      loadOnState: 'cloud-connect',
+      types: [
+        {
+          path: '/ovhCloudConnect',
+          state: 'cloud-connect',
+          stateParams: ['ovhCloudConnectId'],
+          app: [DEDICATED],
+        },
+      ],
+      icon: 'ovh-font ovh-font-cloud-connect',
+      app: [DEDICATED],
+      regions: ['EU', 'CA', 'US'],
+    }
+  ]
 };
 
 export const CLOUD_DESKTOP_CONFIG = {
@@ -325,7 +348,7 @@ export const SIDEBAR_CONFIG = [
   METRICS_CONFIG,
   LOGS_CONFIG,
   IPLB_CONFIG,
-  VRACK_CONFIG,
+  DEDICATED_NETWORK_CONFIG,
   CLOUD_DESKTOP_CONFIG,
 
   // DEDICATED END
