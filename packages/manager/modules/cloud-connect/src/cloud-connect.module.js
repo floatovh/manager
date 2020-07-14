@@ -1,7 +1,7 @@
 import angular from 'angular';
 
-import component from './component';
-import routing from './routing';
+import component from './cloud-connect.component';
+import routing from './cloud-connect.routing';
 import service from './cloud-connect.service';
 
 const moduleName = 'ovhCloudConnect';

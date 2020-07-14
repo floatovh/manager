@@ -2,5 +2,14 @@
   "cloud_connect_guides": "Guides",
   "cloud_connect_guides_main": "Cloud Connect",
   "cloud_connect_title": "Cloud Connect",
-  "cloud_connect_decription": "Guides"
+  "cloud_connect_detail_decription": "dsfds fsd f df dsf sdfsdfdsfdsf  fsdfsdfdsfsdf fsdfd",
+  "cloud_connect_informations": "Informations",
+  "cloud_connect_description": "Description",
+  "cloud_connect_update": "Modifier",
+  "cloud_connect_date_created": "Date de livraison",
+  "cloud_connect_status": "Statut",
+  "cloud_connect_bandwidth": "Bande passante",
+  "cloud_connect_number_of_ports": "Nombre de port",
+  "cloud_connect_associate_vrack": "Associer un vRack",
+  "cloud_connect_ola_download": "Telecharger la LOA"
 }
