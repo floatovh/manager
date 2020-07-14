@@ -314,8 +314,8 @@ export const DEDICATED_NETWORK_CONFIG = {
       icon: 'ovh-font ovh-font-cloud-connect',
       app: [DEDICATED],
       regions: ['EU', 'CA', 'US'],
-    }
-  ]
+    },
+  ],
 };
 
 export const CLOUD_DESKTOP_CONFIG = {

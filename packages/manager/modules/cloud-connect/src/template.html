@@ -1,0 +1,25 @@
+<div data-ui-view>
+    <oui-page-header
+        data-heading="{{ ::$ctrl.cloudConnect.description }}"
+        data-description="{{ ::$ctrl.cloudConnect.uuid }}"
+    >
+        <oui-guide-menu
+            data-text="{{ ::'cloud_connect_guides' | translate }}"
+        >
+            <oui-guide-menu-item
+                data-text="{{ ::'cloud_connect_guides_main' | translate }}"
+                data-href="{{:: $ctrl.GUIDELINK.main.EN }}"
+                data-external
+            >
+            </oui-guide-menu-item>
+        </oui-guide-menu>
+    </oui-page-header>
+    <div class="container-fluid w-100 h-100 pt-4 px-3 px-md-5">
+        <!-- error messages -->
+        <cui-message-container
+            data-messages="$ctrl.messages"
+        ></cui-message-container>
+
+    </div>
+</div>
+
