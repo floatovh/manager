@@ -4,6 +4,7 @@ import '@ovh-ux/manager-core';
 import '@uirouter/angularjs';
 import 'angular-translate';
 import 'oclazyload';
+import moment from 'moment';
 import ngOvhCloudUniverseComponents from '@ovh-ux/ng-ovh-cloud-universe-components';
 
 const moduleName = 'ovhCloudConnectLazyLoading';
@@ -14,7 +15,7 @@ angular
     'pascalprecht.translate',
     'ui.router',
     'oc.lazyLoad',
-    ngOvhCloudUniverseComponents
+    ngOvhCloudUniverseComponents,
   ])
   .config(
     /* @ngInject */ ($stateProvider) => {
@@ -28,6 +29,20 @@ angular
           );
         },
       });
+    },
+  )
+  .run(
+    /* @ngInject */ ($translate) => {
+      let lang = $translate.use();
+
+      if (['en_GB', 'es_US', 'fr_CA'].includes(lang)) {
+        lang = lang.toLowerCase().replace('_', '-');
+      } else {
+        [lang] = lang.split('_');
+      }
+      return import(`script-loader!moment/locale/${lang}.js`).then(() =>
+        moment.locale(lang),
+      );
     },
   );
 

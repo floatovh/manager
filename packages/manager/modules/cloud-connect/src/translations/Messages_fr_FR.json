@@ -11,5 +11,9 @@
   "cloud_connect_bandwidth": "Bande passante",
   "cloud_connect_number_of_ports": "Nombre de port",
   "cloud_connect_associate_vrack": "Associer un vRack",
-  "cloud_connect_ola_download": "Telecharger la LOA"
+  "cloud_connect_ola_download": "Telecharger la LOA",
+  "cloud_connect_status_active": "Actif",
+  "cloud_connect_status_closed": "Fermé",
+  "cloud_connect_common_cancel": "Annuler",
+  "cloud_connect_common_confirm": "Confirmer"
 }
