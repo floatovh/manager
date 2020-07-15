@@ -1,11 +1,11 @@
 import 'script-loader!jquery'; // eslint-disable-line
 import 'whatwg-fetch';
 import { attach as attachPreloader } from '@ovh-ux/manager-preloader';
-import { bootstrapApplication } from '@ovh-ux/manager-core';
+import registerApplication from '@ovh-ux/ufrontend/application'; // eslint-disable-line
 
 attachPreloader();
 
-bootstrapApplication().then(({ region }) => {
+registerApplication().then(({ region }) => {
   import(`./config-${region}`)
     .catch(() => {})
     .then(() => import('./app.module'))
