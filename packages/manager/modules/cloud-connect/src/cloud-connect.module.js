@@ -1,13 +1,18 @@
 import angular from 'angular';
 
+import associateVrack from './associate-vrack';
 import component from './cloud-connect.component';
+import removeVrack from './remove-vrack';
 import routing from './cloud-connect.routing';
 import service from './cloud-connect.service';
 
 const moduleName = 'ovhCloudConnect';
 
 angular
-  .module(moduleName, [])
+  .module(moduleName, [
+    associateVrack,
+    removeVrack,
+  ])
   .config(routing)
   .component(
     'cloudConnect',

@@ -2,11 +2,19 @@ export default /* @ngInject */ ($stateProvider) => {
   $stateProvider
     .state('cloud-connect.associate-vrack', {
       url: '/associate-vrack',
-      component: 'cloudConnectAssociateVrack',
+      views: {
+        modal: {
+          component: 'cloudConnectAssociateVrack',
+        },
+      },
+      layout: 'modal',
       translations: {
         value: ['.'],
         format: 'json',
       },
-      resolve: {},
+      resolve: {
+        vRacks: /* @ngInject */ (cloudConnectService) => cloudConnectService.getVracks(),
+        goBack: /* @ngInject */ (goToCloudConnectPage) => goToCloudConnectPage
+      },
     });
 };

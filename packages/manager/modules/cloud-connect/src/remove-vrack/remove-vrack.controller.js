@@ -1,6 +1,6 @@
 import get from 'lodash/get';
 
-export default class AssociateVrackCtrl {
+export default class RemoveVrackCtrl {
   /* @ngInject */
   constructor($translate, cloudConnectService) {
     this.$translate = $translate;
@@ -11,24 +11,21 @@ export default class AssociateVrackCtrl {
     this.isLoading = false;
   }
 
-  associateVrack() {
+  removeVrack() {
     this.isLoading = true;
-    this.cloudConnectService.associateVrack(this.vRack.id, this.cloudConnectId)
+    this.cloudConnectService.removeVrack(this.vRackId, this.cloudConnectId)
     .then(() => {
       this.cloudConnectService.getCloudConnect(this.cloudConnectId)
         .then(cloudConnect => {
-          cloudConnect.vrack = this.vRack.id;
+          cloudConnect.vrack = null;
         });
       return this.goBack(
-        this.$translate.instant('cloud_connect_vrack_associate_success', {
-          vRackName: this.vRack.name || this.vRack.id,
-        }),
+        this.$translate.instant('cloud_connect_remove_success'),
         'success'
       );
     })
     .catch((error) => this.goBack(
-      this.$translate.instant('cloud_connect_vrack_associate_error', {
-        vRackName: this.vRack.name || this.vRack.id,
+      this.$translate.instant('cloud_connect_remove_error', {
         message: get(error, 'data.message', error.message),
       }),
       'error'

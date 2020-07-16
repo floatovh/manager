@@ -15,12 +15,13 @@
         </oui-guide-menu>
     </oui-page-header>
     <div class="container-fluid cui-page__content cui-page__content-flex">
+
         <!-- error messages -->
         <cui-message-container
             data-messages="$ctrl.messages"
         ></cui-message-container>
 
-        <h2 data-translate="cloud_connect_title"></h2>
+        <h2 class="pt-2" data-translate="cloud_connect_title"></h2>
         <p data-translate="cloud_connect_detail_decription"></p>
 
         <div class="row d-lg-flex">
@@ -80,12 +81,22 @@
                                 <dt class="oui-tile__term">vRack</dt>
                                 <dd class="oui-tile__description" data-ng-if="!$ctrl.cloudConnect.vrack">
                                     <span>-</span>
-                                    <button class="oui-button oui-button_link d-block pl-0">{{ ::'cloud_connect_associate_vrack' | translate }}</button>
+                                    <button class="oui-button oui-button_link d-block pl-0" data-ng-click="$ctrl.goToAssociateVrackPage()">
+                                        {{ ::'cloud_connect_vrack_associate' | translate }}
+                                    </button>
                                 </dd>
                                 <dd class="oui-tile__description" data-ng-if="$ctrl.cloudConnect.vrack">
                                     <span data-ng-bind="$ctrl.cloudConnect.vrack"></span>
                                 </dd>
                             </dl>
+                            <div class="oui-tile__actions" data-ng-if="$ctrl.cloudConnect.vrack">
+                                <oui-action-menu data-compact data-align="end">
+                                    <oui-action-menu-item
+                                        data-on-click="$ctrl.goToRemoveVrackPage($ctrl.cloudConnect.vrack)"
+                                        data-text="{{ ::'cloud_connect_vrack_remove' | translate }}">
+                                    </oui-action-menu-item>
+                                </oui-action-menu>
+                            </div>
                         </div>
                     </div>
                     <!-- status -->

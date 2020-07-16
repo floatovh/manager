@@ -10,6 +10,17 @@
   "cloud_connect_status": "Statut",
   "cloud_connect_bandwidth": "Bande passante",
   "cloud_connect_number_of_ports": "Nombre de port",
-  "cloud_connect_associate_vrack": "Associer un vRack",
-  "cloud_connect_ola_download": "Telecharger la LOA"
+  "cloud_connect_ola_download": "Telecharger la LOA",
+  "cloud_connect_create": "créer",
+  "cloud_connect_cancel": "Annuler",
+  "cloud_connect_remove": "Retirer",
+  "cloud_connect_vrack_associate": "Associer un vRack",
+  "cloud_connect_vrack_associate_description": "Pour configurer votre OVHcloud Connect vous devez lui associer un vRack. Sélectionnez le vRack concerné dans la liste déroulante suivante ou créez en un nouveau en <a href=\"{{ vrackOrderUrl }}\" target=\"blank\" rel=\"noopener\">cliquant ici.</a>",
+  "cloud_connect_vrack_select": "sélectionnez un vRack existant",
+  "cloud_connect_vrack_associate_success": "Le vRack a bien été associé à votre Cloud Connect",
+  "cloud_connect_vrack_associate_error": "Impossible d'associer vRack à votre Cloud Connect: {{ message }}",
+  "cloud_connect_vrack_remove": "Supprimer un vRack",
+  "cloud_connect_vrack_remove_description": "Supprimer vRack de votre Cloud Connect?",
+  "cloud_connect_vrack_remove_success": "Le vRack a été supprimé avec succès de votre Cloud Connect",
+  "cloud_connect_vrack_remove_error": "Impossible de supprimer vRack de votre Cloud Connect: {{ message }}"
 }
