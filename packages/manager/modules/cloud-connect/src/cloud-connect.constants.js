@@ -17,7 +17,19 @@ export const POP_MAP = {
   'par-gsw': 'FR - Paris - GlobalSwitch - Clichy',
 };
 
+export const POP_TYPES = [
+  {
+    name: 'L2',
+    id: 'l2',
+  },
+  {
+    name: 'L3',
+    id: 'l3',
+  },
+];
+
 export default {
   GUIDELINK,
   POP_MAP,
+  POP_TYPES,
 };

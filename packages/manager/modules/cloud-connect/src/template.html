@@ -23,6 +23,7 @@
 
         <div class="row d-lg-flex">
             <div class="col-sm-12 col-md-4">
+                <!-- Information tile -->
                 <div class="oui-tile">
                     <div class="d-flex flex-row">
                         <h4
@@ -108,7 +109,7 @@
                                 <dt class="oui-tile__term">vRack</dt>
                                 <dd
                                     class="oui-tile__description"
-                                    data-ng-if="!$ctrl.cloudConnect.vrack"
+                                    data-ng-if="!$ctrl.cloudConnect.isVrackAssociated()"
                                 >
                                     <span>-</span>
                                     <button
@@ -121,7 +122,7 @@
                                 </dd>
                                 <dd
                                     class="oui-tile__description"
-                                    data-ng-if="$ctrl.cloudConnect.vrack"
+                                    data-ng-if="$ctrl.cloudConnect.isVrackAssociated()"
                                 >
                                     <span
                                         data-ng-bind="$ctrl.cloudConnect.vrack"
@@ -130,7 +131,7 @@
                             </dl>
                             <div
                                 class="oui-tile__actions"
-                                data-ng-if="$ctrl.cloudConnect.vrack"
+                                data-ng-if="$ctrl.cloudConnect.isVrackAssociated()"
                             >
                                 <oui-action-menu data-compact data-align="end">
                                     <oui-action-menu-item
@@ -194,6 +195,30 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div
+                class="col-sm-12 col-md-4"
+                data-ng-repeat="interfaceId in $ctrl.cloudConnect.interfaceList track by interfaceId"
+            >
+                <!-- Configure POP tile -->
+                <oui-tile
+                    data-heading="{{ ::'cloud_connect_configure_pop' | translate }}"
+                    data-ng-if="$ctrl.cloudConnect.isVrackAssociated()"
+                    data-loading="$ctrl.cloudConnect.isLoadingConfiguration()"
+                >
+                    <oui-tile-definition
+                        data-ng-if="!$ctrl.cloudConnect.isPopConfigured(interfaceId)"
+                    >
+                        <oui-tile-description>
+                            <oui-button
+                                data-variant="primary"
+                                data-text="{{ ::'cloud_connect_configure_pop_add' | translate }}"
+                                data-ng-click="$ctrl.goToPopConfigurationPage(interfaceId)"
+                            >
+                            </oui-button>
+                        </oui-tile-description>
+                    </oui-tile-definition>
+                </oui-tile>
             </div>
         </div>
     </div>

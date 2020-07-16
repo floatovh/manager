@@ -28,5 +28,13 @@
   "cloud_connect_common_cancel": "Annuler",
   "cloud_connect_common_confirm": "Confirmer",
   "cloud_connect_common_m": "Mo",
-  "cloud_connect_common_g": "Go"
+  "cloud_connect_common_g": "Go",
+  "cloud_connect_configure_pop": "Configuration PoP",
+  "cloud_connect_configure_pop_add": "Ajouter une configuration PoP",
+  "cloud_connect_configure_pop_title": "Ajout d’une configuration PoP",
+  "cloud_connect_configure_pop_description": "Pour configurer votre Pop vous devez sélectionner votre modèle d’interconnexion réseau L2 ou L3",
+  "cloud_connect_configure_pop_select_type": "Sélectionnez un Configuration type",
+  "cloud_connect_type": "Type",
+  "cloud_connect_get_pop_configuration_error": "Échec de la récupération de la configuration PoP de Cloud Connect: {{ message }}",
+  "cloud_connect_pop_configuration_add_error": ""
 }
