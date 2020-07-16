@@ -7,7 +7,7 @@ export default {
     cloudConnectId: '<',
     goToAssociateVrackPage: '<',
     goToRemoveVrackPage: '<',
-    updateDescription: '<',
+    goToUpdateDescriptionPage: '<',
     user: '<',
   },
   controller,

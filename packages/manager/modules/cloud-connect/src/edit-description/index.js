@@ -2,7 +2,7 @@ import angular from 'angular';
 import '@uirouter/angularjs';
 import component from './edit-description.component';
 
-const moduleName = 'cloudConnectEditDescription';
+const moduleName = 'ovhCloudConnectEditDescription';
 
 angular
   .module(moduleName, ['ui.router'])
@@ -12,7 +12,7 @@ angular
         url: '/edit-description',
         views: {
           modal: {
-            component: 'ovhCloudConnectEditDescription',
+            component: 'cloudConnectEditDescription',
           },
         },
         layout: 'modal',
@@ -23,7 +23,7 @@ angular
       });
     },
   )
-  .component('ovhCloudConnectEditDescription', component)
+  .component('cloudConnectEditDescription', component)
   .run(/* @ngTranslationsInject:json ./translations */);
 
 export default moduleName;
