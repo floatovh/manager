@@ -10,6 +10,9 @@ angular
     /* @ngInject */ ($stateProvider) => {
       $stateProvider.state('cloud-connect.edit-description', {
         url: '/edit-description',
+        params: {
+          description: null,
+        },
         views: {
           modal: {
             component: 'cloudConnectEditDescription',
@@ -19,6 +22,8 @@ angular
         resolve: {
           description: /* @ngInject */ ($transition$) =>
             $transition$.params().description,
+          goBack: /* @ngInject */ (goToCloudConnectPage) =>
+            goToCloudConnectPage,
         },
       });
     },

@@ -26,5 +26,7 @@
   "cloud_connect_status_active": "Actif",
   "cloud_connect_status_closed": "Fermé",
   "cloud_connect_common_cancel": "Annuler",
-  "cloud_connect_common_confirm": "Confirmer"
+  "cloud_connect_common_confirm": "Confirmer",
+  "cloud_connect_common_m": "Mo",
+  "cloud_connect_common_g": "Go"
 }

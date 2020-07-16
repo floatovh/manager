@@ -13,7 +13,6 @@
         </oui-guide-menu>
     </oui-page-header>
     <div class="container-fluid cui-page__content cui-page__content-flex">
-
         <!-- error messages -->
         <cui-message-container
             data-messages="$ctrl.messages"
@@ -68,7 +67,7 @@
                             <div class="oui-tile__actions">
                                 <oui-action-menu data-compact data-align="end">
                                     <oui-action-menu-item
-                                        data-on-click="$ctrl.goToUpdateDescriptionPage()"
+                                        data-on-click="$ctrl.goToUpdateDescriptionPage($ctrl.cloudConnect.description)"
                                         data-text="{{ ::'cloud_connect_update' | translate }}"
                                     ></oui-action-menu-item>
                                 </oui-action-menu>
@@ -112,8 +111,12 @@
                                     data-ng-if="!$ctrl.cloudConnect.vrack"
                                 >
                                     <span>-</span>
-                                    <button class="oui-button oui-button_link d-block pl-0" data-ng-click="$ctrl.goToAssociateVrackPage()">
-                                        {{ ::'cloud_connect_vrack_associate' | translate }}
+                                    <button
+                                        class="oui-button oui-button_link d-block pl-0"
+                                        data-ng-click="$ctrl.goToAssociateVrackPage()"
+                                    >
+                                        {{ ::'cloud_connect_vrack_associate' |
+                                        translate }}
                                     </button>
                                 </dd>
                                 <dd
@@ -125,11 +128,15 @@
                                     ></span>
                                 </dd>
                             </dl>
-                            <div class="oui-tile__actions" data-ng-if="$ctrl.cloudConnect.vrack">
+                            <div
+                                class="oui-tile__actions"
+                                data-ng-if="$ctrl.cloudConnect.vrack"
+                            >
                                 <oui-action-menu data-compact data-align="end">
                                     <oui-action-menu-item
                                         data-on-click="$ctrl.goToRemoveVrackPage($ctrl.cloudConnect.vrack)"
-                                        data-text="{{ ::'cloud_connect_vrack_remove' | translate }}">
+                                        data-text="{{ ::'cloud_connect_vrack_remove' | translate }}"
+                                    >
                                     </oui-action-menu-item>
                                 </oui-action-menu>
                             </div>
@@ -166,7 +173,7 @@
                                 ></dt>
                                 <dd
                                     class="oui-tile__description"
-                                    data-ng-bind="$ctrl.cloudConnect.bandwidth"
+                                    data-ng-bind="$ctrl.getBandwidth($ctrl.cloudConnect.bandwidth)"
                                 ></dd>
                             </dl>
                         </div>
