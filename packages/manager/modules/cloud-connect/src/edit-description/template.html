@@ -1,0 +1,24 @@
+<form id="descriptionChangeForm" data-ng-submit="$ctrl.confirm()">
+    <oui-modal
+        data-title="{{:: 'cloud_connect_edit_modal_title' | translate}}"
+        data-on-dismiss="$ctrl.goBack()"
+        data-primary-label="{{:: 'cloud_connect_common_confirm' | translate}}"
+        data-primary-action="$ctrl.confirm()"
+        data-secondary-action="$ctrl.goBack()"
+        data-secondary-label="{{:: 'cloud_connect_common_cancel' | translate}}"
+        data-loading="$ctrl.isModalLoading()"
+    >
+        <oui-field
+            data-label="{{::'cloud_connect_edit_modal_description' | translate}}"
+        >
+            <input
+                type="text"
+                id="newDescription"
+                name="newDescription"
+                class="oui-input"
+                data-ng-model="$ctrl.description"
+                required
+            />
+        </oui-field>
+    </oui-modal>
+</form>

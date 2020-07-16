@@ -17,6 +17,8 @@ export default /* @ngInject */ ($stateProvider) => {
           $state.go('cloud-connect.associate-vrack'),
         goToRemoveVrackPage: /* @ngInject */ ($state) => (vRackId) =>
           $state.go('cloud-connect.remove-vrack', { vRackId }),
+        updateDescription: /* @ngInject */ ($state) => () =>
+          $state.go('cloud-connect.edit-description'),
         goToCloudConnectPage: /* @ngInject */ ($state, CucCloudMessage, cloudConnectId) => (
             message = false,
             type = 'success',

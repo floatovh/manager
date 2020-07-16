@@ -1,15 +1,18 @@
 import filter from 'lodash/filter';
+import forOwn from 'lodash/forOwn';
 import isEmpty from 'lodash/isEmpty';
 import map from 'lodash/map';
 
 export default class CloudConnectService {
   /* @ngInject */
-  constructor($q, $http, OvhApiVrack) {
-    // this.$cacheFactory = $cacheFactory,
+  constructor($cacheFactory, $q, $http, OvhApiVrack) {
+    this.$cacheFactory = $cacheFactory,
     this.$q = $q;
-    // this.OvhHttp = OvhHttp;
     this.$http = $http;
     this.OvhApiVrack = OvhApiVrack;
+    this.cache = {
+      serviceInfo: 'CLOUD_CONNECT_SERVICE_INFOS',
+    };
   }
 
   getCloudConnect(cloudConnectId) {
@@ -26,11 +29,19 @@ export default class CloudConnectService {
       return this.$q.when(this.cloudConnect);
     } else {
       return this.$http.get(`/ovhCloudConnect/${cloudConnectId}`)
-      .then((res) => {
-        this.cloudConnect = res.data;
-        return this.cloudConnect;
-      });
+        .then((res) => {
+          this.cloudConnect = res.data;
+          return this.cloudConnect;
+        });
     }
+  }
+
+  getCloudConnectServiceInfo(serviceName) {
+    return this.$http
+      .get(`/ovhCloudConnect/${serviceName}/serviceInfos`, {
+        cache: this.cache.serviceInfo,
+      })
+      .then((res) => res.data);
   }
 
   getVracks() {
@@ -66,5 +77,20 @@ export default class CloudConnectService {
 
   removeVrack(vRackId, ovhCloudConnectId) {
     return this.$http.delete(`/vrack/${vRackId}/ovhCloudConnect/${ovhCloudConnectId}`);
+  }
+
+  saveDescription(serviceName, description) {
+    return this.$http.put(`/ovhCloudConnect/${serviceName}`, {
+      description,
+    });
+  }
+
+  clearCache() {
+    forOwn(this.cache, (cacheName) => {
+      const cacheInstance = this.$cacheFactory.get(cacheName);
+      if (cacheInstance) {
+        cacheInstance.removeAll();
+      }
+    });
   }
 }
