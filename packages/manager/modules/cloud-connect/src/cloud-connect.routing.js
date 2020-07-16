@@ -19,11 +19,13 @@ export default /* @ngInject */ ($stateProvider) => {
           $state.go('cloud-connect.remove-vrack', { vRackId }),
         goToUpdateDescriptionPage: /* @ngInject */ ($state) => () =>
           $state.go('cloud-connect.edit-description'),
+        goToPopConfigurationPage: /* @ngInject */ ($state) => (interfaceId) =>
+          $state.go('cloud-connect.pop-configuration', { interfaceId }),
         goToCloudConnectPage: /* @ngInject */ ($state, CucCloudMessage, cloudConnectId) => (
             message = false,
             type = 'success',
+            reload = false,
           ) => {
-            const reload = message && type === 'success';
             const state = 'cloud-connect';
             const promise = $state.go(
               state,
