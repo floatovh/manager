@@ -8,12 +8,15 @@ import routing from './cloud-connect.routing';
 import popConfiguration from './pop-configuration';
 import service from './cloud-connect.service';
 
+import datacenterAdd from './datacenter/add';
+
 const moduleName = 'ovhCloudConnect';
 
 angular
   .module(moduleName, [
     associateVrack,
     editDescription,
+    datacenterAdd,
     removeVrack,
     popConfiguration,
   ])

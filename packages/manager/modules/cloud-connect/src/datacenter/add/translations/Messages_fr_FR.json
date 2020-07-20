@@ -1,0 +1,9 @@
+{
+  "cloud_connect_datacenter_add_title": "Ajouter une configuration datacentre",
+  "cloud_connect_datacenter_add_description": "Vous pouvez ajouter un centre de données ici",
+  "cloud_connect_datacenter_add_select_title": "Sélectionnez un datacentre",
+  "cloud_connect_datacenter_add_select_placeholder": "Sélectionnez",
+  "cloud_connect_datacenter_add_select_asn": "Saisissez l'ASN OVH",
+  "cloud_connect_datacenter_add_network_address": "Saisissez l'adresse réseau en /28",
+  "cloud_connect_datacenter_add_network_address_placeholder": "Réseau"
+}

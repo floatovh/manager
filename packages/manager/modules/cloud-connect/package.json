@@ -20,6 +20,7 @@
     "angular": "^1.7.5",
     "angular-translate": "^2.18.1",
     "moment": "^2.24.0",
-    "oclazyload": "^1.1.0"
+    "oclazyload": "^1.1.0",
+    "ovh-api-services": "^9.39.1"
   }
 }

@@ -6,6 +6,7 @@ export default {
     cloudConnect: '<',
     cloudConnectId: '<',
     goToAssociateVrackPage: '<',
+    goToDatacenterAdd: '<',
     goToRemoveVrackPage: '<',
     goToPopConfigurationPage: '<',
     goToUpdateDescriptionPage: '<',

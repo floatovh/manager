@@ -20,6 +20,8 @@ export default /* @ngInject */ ($stateProvider) => {
         $state.go('cloud-connect.edit-description', { description }),
       goToPopConfigurationPage: /* @ngInject */ ($state) => (interfaceId) =>
         $state.go('cloud-connect.pop-configuration', { interfaceId }),
+      goToDatacenterAdd: /* @ngInject */ ($state) => (cloudConnect) =>
+        $state.go('cloud-connect.datacenter-add', { cloudConnect }),
       goToCloudConnectPage: /* @ngInject */ (
         $state,
         CucCloudMessage,
