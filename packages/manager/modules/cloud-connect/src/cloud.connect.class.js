@@ -1,10 +1,15 @@
 import isEmpty from 'lodash/isEmpty';
 
+import CloudConnectPop from './cloud-connect-pop.class';
+import CloudConnectInterface from './cloud-connect-interface.class';
+
 export default class CloudConnect {
   constructor(cloudConnect) {
     Object.assign(this, cloudConnect);
-    this.loadingConfiguration = false;
+    this.loadingPopConfiguration = false;
+    this.loadingInterface = false;
     this.popConfiguration = {};
+    this.interfaces = {};
   }
 
   isVrackAssociated() {
@@ -12,14 +17,12 @@ export default class CloudConnect {
   }
 
   isPopConfigured(interfaceId) {
-    return (
-      !isEmpty(this.popConfiguration) && this.popConfiguration[interfaceId]
-    );
+    return !isEmpty(this.popConfiguration) && this.popConfiguration[interfaceId];
   }
 
   setPopConfiguration(configuration) {
     if (configuration.interfaceId) {
-      this.popConfiguration[configuration.interfaceId] = configuration;
+      this.popConfiguration[configuration.interfaceId] = new CloudConnectPop(configuration);
     }
   }
 
@@ -27,15 +30,37 @@ export default class CloudConnect {
     return this.popConfiguration[interfaceId];
   }
 
-  setLoadingConfiguration(loading) {
-    this.loadingConfiguration = loading;
+  setLoadingPopConfiguration(loading) {
+    this.loadingPopConfiguration = loading;
   }
 
-  isLoadingConfiguration() {
-    return this.loadingConfiguration;
+  isLoadingPopConfiguration() {
+    return this.loadingPopConfiguration;
+  }
+
+  setInterface(ccInterface) {
+    if (ccInterface.id) {
+      this.interfaces[ccInterface.id] = new CloudConnectInterface(ccInterface);
+    }
+  }
+
+  getInterface(interfaceId) {
+    return this.interfaces[interfaceId];
+  }
+
+  setLoadingInterface(loading) {
+    this.loadingInterface = loading;
+  }
+
+  isLoadingInterface() {
+    return this.loadingInterface;
   }
 
   isActive() {
     return this.status === 'active';
+  }
+
+  isLoadingPop() {
+    return this.isLoadingPopConfiguration() || this.isLoadingInterface();
   }
 }

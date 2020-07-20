@@ -5,7 +5,7 @@
     novalidate
 >
     <oui-modal
-        data-heading="{{ 'cloud_connect_configure_pop_title' | translate }}"
+        data-heading="{{ 'cloud_connect_pop_configure_title' | translate }}"
         data-primary-label="{{:: 'cloud_connect_create' | translate }}"
         data-primary-disabled="$ctrl.isLoading"
         data-secondary-action="$ctrl.goBack()"
@@ -13,7 +13,7 @@
         data-on-dismiss="$ctrl.goBack()"
         data-loading="$ctrl.isLoading"
     >
-        <p data-translate="cloud_connect_configure_pop_description"></p>
+        <p data-translate="cloud_connect_pop_configure_description"></p>
 
         <oui-field data-label="{{ ::'cloud_connect_type' | translate }}">
             <oui-select
@@ -21,7 +21,7 @@
                 data-model="$ctrl.popType"
                 data-items="$ctrl.popTypes"
                 data-match="name"
-                data-placeholder="{{ ::'cloud_connect_configure_pop_select_type' | translate }}"
+                data-placeholder="{{ ::'cloud_connect_pop_configure_pop_select_type' | translate }}"
                 data-required
             >
                 <span data-ng-bind="$item.name"></span>

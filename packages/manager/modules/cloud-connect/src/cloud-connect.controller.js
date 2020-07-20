@@ -19,6 +19,7 @@ export default class CloudConnectCtrl {
     this.loadServiceInfo();
     if (this.cloudConnect.vrack) {
       this.loadPopConfiguration();
+      this.loadInterface();
     }
   }
 
@@ -57,10 +58,27 @@ export default class CloudConnectCtrl {
       );
   }
 
+  loadInterface() {
+    this.cloudConnectService
+      .loadInterface(this.cloudConnect)
+      .catch((error) =>
+        this.CucCloudMessage.error(
+          this.$translate.instant('cloud_connect_pop_get_configuration_error', {
+            message: get(error, 'data.message', error.message),
+          }),
+        ),
+      );
+  }
+
   getBandwidth(bandwidth) {
     const array = bandwidth.split('');
     return `${array[0]} ${this.$translate.instant(
       `cloud_connect_common_${array[1]}`,
     )}`;
+  }
+
+  getPopTypeName(typeId) {
+    return this.cloudConnectService
+      .getPopTypeName(typeId);
   }
 }

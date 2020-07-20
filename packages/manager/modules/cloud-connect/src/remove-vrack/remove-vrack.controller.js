@@ -21,7 +21,8 @@ export default class RemoveVrackCtrl {
         });
       return this.goBack(
         this.$translate.instant('cloud_connect_remove_success'),
-        'success'
+        'success',
+        false,
       );
     })
     .catch((error) => this.goBack(

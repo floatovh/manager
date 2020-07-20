@@ -22,7 +22,7 @@ export default class PopConfigurationCtrl {
       .then(() => this.goBack(null, 'success', true))
       .catch((error) =>
         this.goBack(
-          this.$translate.instant('cloud_connect_pop_configuration_add_error', {
+          this.$translate.instant('cloud_connect_pop_add_configuration_error', {
             message: get(error, 'data.message', error.message),
           }),
           'error',

@@ -1,3 +1,4 @@
+import find from 'lodash/find';
 import forOwn from 'lodash/forOwn';
 import map from 'lodash/map';
 
@@ -15,7 +16,9 @@ export default class CloudConnectService {
     this.POP_TYPES = POP_TYPES;
     this.cache = {
       serviceInfo: 'CLOUD_CONNECT_SERVICE_INFOS',
+      popConfigurationList: 'CLOUD_CONNECT_POP_CONFIGURATION_LIST',
       popConfiguration: 'CLOUD_CONNECT_POP_CONFIGURATION',
+      interface: 'CLOUD_CONNECT_INTERFACE',
     };
   }
 
@@ -76,11 +79,16 @@ export default class CloudConnectService {
     return this.POP_TYPES;
   }
 
+  getPopTypeName(typeId) {
+    const type = find(this.getPopTypes(), type => type.id === typeId);
+    return type ? type.name : typeId;
+  }
+
   loadPopConfiguration(cloudConnect) {
-    cloudConnect.setLoadingConfiguration(true);
+    cloudConnect.setLoadingPopConfiguration(true);
     return this.$http
       .get(`/ovhCloudConnect/${cloudConnect.uuid}/config/pop`, {
-        cache: this.cache.popConfiguration,
+        cache: this.cache.popConfigurationList,
       })
       .then((res) => {
         return this.$q
@@ -88,8 +96,9 @@ export default class CloudConnectService {
             map(res.data, (popConfigId) => {
               return this.$http
                 .get(
-                  `/ovhCloudConnect/${cloudConnect.uuid}/config/pop/${popConfigId}`,
-                )
+                  `/ovhCloudConnect/${cloudConnect.uuid}/config/pop/${popConfigId}`, {
+                  cache: this.cache.popConfiguration,
+                })
                 .then((config) => {
                   cloudConnect.setPopConfiguration(config.data);
                   return config.data;
@@ -98,11 +107,33 @@ export default class CloudConnectService {
           )
           .then(() => cloudConnect)
           .finally(() => {
-            cloudConnect.setLoadingConfiguration(false);
+            cloudConnect.setLoadingPopConfiguration(false);
           });
       })
       .finally(() => {
-        cloudConnect.setLoadingConfiguration(false);
+        cloudConnect.setLoadingPopConfiguration(false);
+      });
+  }
+
+  loadInterface(cloudConnect) {
+    cloudConnect.setLoadingInterface(true);
+    return this.$q
+      .all(
+        map(cloudConnect.interfaceList, (interfaceId) => {
+          return this.$http
+            .get(
+              `/ovhCloudConnect/${cloudConnect.uuid}/interface/${interfaceId}`, {
+              cache: this.cache.interface,
+            })
+            .then((res) => {
+              cloudConnect.setInterface(res.data);
+              return res.data;
+            });
+        }),
+      )
+      .then(() => cloudConnect)
+      .finally(() => {
+        cloudConnect.setLoadingInterface(false);
       });
   }
 
@@ -113,6 +144,7 @@ export default class CloudConnectService {
         interfaceId,
       })
       .then((res) => {
+        this.clearCache(this.cache.popConfigurationList);
         this.clearCache(this.cache.popConfiguration);
         return res.data;
       });
