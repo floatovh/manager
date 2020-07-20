@@ -15,16 +15,16 @@ export default class MoveAddressCtrl {
    * Check if can keep line number
    * @returns {boolean}
    */
-  canKeepLineNumber() {
+  canKeepNumber() {
     const canKeep =
-      this.offer.selected.portability &&
-      this.offer.selected.portability.eligibility.eligible &&
-      this.offer.selected.unbundling !== UNBUNDLING.partial;
+      this.offer.portability &&
+      this.offer.portability.eligibility.eligible &&
+      this.offer.unbundling !== UNBUNDLING.partial;
     return canKeep;
   }
 
   next() {
-    if (!this.canKeepLineNumber()) {
+    if (!this.canKeepNumber()) {
       this.keepLineNumber = false;
     }
     const form = {

@@ -14,5 +14,6 @@ export default {
     rio: '=?',
     canKeepLineNumber: '<',
     futureLineNumber: '<',
+    offer: '<',
   },
 };

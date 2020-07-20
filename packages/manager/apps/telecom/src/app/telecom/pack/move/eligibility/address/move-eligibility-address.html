@@ -237,36 +237,36 @@
             data-translate="pack_move_eligibility_address_available_lines"
         ></div>
         <oui-datagrid rows="$ctrl.availableLines">
-            <oui-column
+            <oui-datagrid-column
                 data-title="'pack_move_eligibility_address_line_number' | translate"
                 data-property="lineNumber"
                 type="string"
             >
-            </oui-column>
-            <oui-column
+            </oui-datagrid-column>
+            <oui-datagrid-column
                 data-title="'pack_move_eligibility_address_owner' | translate"
                 data-property="address.ownerName"
                 type="string"
             >
-            </oui-column>
-            <oui-column
+            </oui-datagrid-column>
+            <oui-datagrid-column
                 data-title="'pack_move_eligibility_address_actions' | translate"
             >
                 <oui-button
                     data-variant="primary"
-                    data-text="{{'pack_move_eligibility_address_select_line' | translate}}"
                     data-on-click="$ctrl.testLineEligibility($row)"
-                >
+                    ><span
+                        data-translate="pack_move_eligibility_address_select_line"
+                    ></span>
                 </oui-button>
-            </oui-column>
+            </oui-datagrid-column>
         </oui-datagrid>
     </div>
     <div data-ng-if="$ctrl.isAvailableLine && $ctrl.displayResult">
-        <oui-button
-            data-variant="primary"
-            data-text="{{'pack_move_eligibility_address_create_line' | translate}}"
-            data-on-click="$ctrl.createLine()"
-        >
+        <oui-button data-variant="primary" data-on-click="$ctrl.createLine()"
+            ><span
+                data-translate="pack_move_eligibility_address_create_line"
+            ></span>
         </oui-button>
     </div>
 </form>
