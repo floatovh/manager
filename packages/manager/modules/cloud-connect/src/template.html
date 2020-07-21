@@ -179,7 +179,6 @@
                             <oui-action-menu-item
                                 data-text="{{ ::'cloud_connect_pop_configure_delete' | translate }}"
                                 data-on-click="$ctrl.goToRemovePopConfigurationPage(interfaceId)">
-                            >
                             </oui-action-menu-item>
                         </oui-action-menu>
                     </div>
@@ -259,13 +258,11 @@
                                     data-ng-if="$interface.isEnabled()"
                                     data-text="{{ ::'cloud_connect_pop_port_block' | translate }}"
                                     data-on-click="$ctrl.goToLockPortPage(interfaceId)">
-                                >
                                 </oui-action-menu-item>
                                 <oui-action-menu-item
                                     data-ng-if="!$interface.isEnabled()"
                                     data-text="{{ ::'cloud_connect_pop_port_unblock' | translate }}"
                                     data-on-click="$ctrl.goToUnlockPortPage(interfaceId)">
-                                >
                                 </oui-action-menu-item>
                             </oui-action-menu>
                         </oui-tile-definition>
