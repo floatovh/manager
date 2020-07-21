@@ -6,9 +6,11 @@ import CloudConnectInterface from './cloud-connect-interface.class';
 export default class CloudConnect {
   constructor(cloudConnect) {
     Object.assign(this, cloudConnect);
+    this.datacenterConfigurations = [];
     this.loadingPopConfiguration = false;
     this.loadingInterface = false;
     this.loadingServiceKeys = false;
+    this.loadingDatacenterConfig = false;
     this.popConfiguration = {};
     this.interfaces = {};
   }
@@ -22,12 +24,16 @@ export default class CloudConnect {
   }
 
   isPopConfigured(interfaceId) {
-    return !isEmpty(this.popConfiguration) && this.popConfiguration[interfaceId];
+    return (
+      !isEmpty(this.popConfiguration) && this.popConfiguration[interfaceId]
+    );
   }
 
   setPopConfiguration(configuration) {
     if (configuration.interfaceId) {
-      this.popConfiguration[configuration.interfaceId] = new CloudConnectPop(configuration);
+      this.popConfiguration[configuration.interfaceId] = new CloudConnectPop(
+        configuration,
+      );
     }
   }
 
@@ -73,6 +79,18 @@ export default class CloudConnect {
 
   setLoadingInterface(loading) {
     this.loadingInterface = loading;
+  }
+
+  setPopIds(ids) {
+    this.popIds = ids;
+  }
+
+  setDatacenterConfigurations(configuration) {
+    this.datacenterConfigurations.push(configuration);
+  }
+
+  setLoadingDatacenters(loading) {
+    this.loadingDatacenterConfig = loading;
   }
 
   isLoadingInterface() {

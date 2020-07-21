@@ -16,7 +16,6 @@ export default class CloudConnectEditDescriptionCtrl {
         return this.goBack(
           this.$translate.instant('cloud_connect_datacenter_add_success'),
           'success',
-          true,
         );
       })
       .catch((error) =>

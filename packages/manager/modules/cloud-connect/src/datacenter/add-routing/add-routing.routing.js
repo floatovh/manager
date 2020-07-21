@@ -1,9 +1,9 @@
 export default /* @ngInject */ ($stateProvider) => {
-  $stateProvider.state('cloud-connect.datacenter-add', {
-    url: '/datacenter-add',
+  $stateProvider.state('cloud-connect.datacenter-add-routing', {
+    url: '/datacenter-add-routing',
     views: {
       modal: {
-        component: 'cloudConnectDatacenterAdd',
+        component: 'cloudConnectDatacenterAddRouting',
       },
     },
     translations: {
@@ -13,8 +13,6 @@ export default /* @ngInject */ ($stateProvider) => {
     layout: 'modal',
     resolve: {
       goBack: /* @ngInject */ (goToCloudConnectPage) => goToCloudConnectPage,
-      datacenters: /* @ngInject */ (cloudConnectService, cloudConnect) =>
-        cloudConnectService.getDatacenterList(cloudConnect),
     },
   });
 };

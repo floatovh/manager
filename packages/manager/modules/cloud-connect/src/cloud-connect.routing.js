@@ -18,16 +18,29 @@ export default /* @ngInject */ ($stateProvider) => {
         $state.go('cloud-connect.remove-vrack', { vRackId }),
       goToUpdateDescriptionPage: /* @ngInject */ ($state) => (description) =>
         $state.go('cloud-connect.edit-description', { description }),
-      goToAddPopConfigurationPage: /* @ngInject */ ($state, cloudConnect) => (interfaceId) =>
-        $state.go('cloud-connect.add-pop', { interfaceId, isProviderService: cloudConnect.isProviderService() }),
-      goToRemovePopConfigurationPage: /* @ngInject */ ($state, cloudConnect) => (interfaceId) =>
-        $state.go('cloud-connect.remove-pop', { interfaceId, popId: cloudConnect.getPopConfiguration(interfaceId).id }),
+      goToAddPopConfigurationPage: /* @ngInject */ ($state, cloudConnect) => (
+        interfaceId,
+      ) =>
+        $state.go('cloud-connect.add-pop', {
+          interfaceId,
+          isProviderService: cloudConnect.isProviderService(),
+        }),
+      goToRemovePopConfigurationPage: /* @ngInject */ (
+        $state,
+        cloudConnect,
+      ) => (interfaceId) =>
+        $state.go('cloud-connect.remove-pop', {
+          interfaceId,
+          popId: cloudConnect.getPopConfiguration(interfaceId).id,
+        }),
       goToLockPortPage: /* @ngInject */ ($state) => (interfaceId) =>
         $state.go('cloud-connect.lock-port', { interfaceId }),
       goToUnlockPortPage: /* @ngInject */ ($state) => (interfaceId) =>
         $state.go('cloud-connect.unlock-port', { interfaceId }),
-      goToDatacenterAdd: /* @ngInject */ ($state) => (cloudConnect) =>
-        $state.go('cloud-connect.datacenter-add', { cloudConnect }),
+      goToDatacenterAdd: /* @ngInject */ ($state) => () =>
+        $state.go('cloud-connect.datacenter-add'),
+      goToDatacenterAddRouting: /* @ngInject */ ($state) => () =>
+        $state.go('cloud-connect.datacenter-add-routing'),
       goToCloudConnectPage: /* @ngInject */ (
         $state,
         CucCloudMessage,
