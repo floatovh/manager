@@ -8,6 +8,8 @@ import 'ovh-api-services';
 import moment from 'moment';
 import ngOvhCloudUniverseComponents from '@ovh-ux/ng-ovh-cloud-universe-components';
 
+import './style.scss';
+
 const moduleName = 'ovhCloudConnectLazyLoading';
 
 angular

@@ -26,6 +26,8 @@ export default /* @ngInject */ ($stateProvider) => {
         $state.go('cloud-connect.lock-port', { interfaceId }),
       goToUnlockPortPage: /* @ngInject */ ($state) => (interfaceId) =>
         $state.go('cloud-connect.unlock-port', { interfaceId }),
+      goToDatacenterAdd: /* @ngInject */ ($state) => (cloudConnect) =>
+        $state.go('cloud-connect.datacenter-add', { cloudConnect }),
       goToCloudConnectPage: /* @ngInject */ (
         $state,
         CucCloudMessage,

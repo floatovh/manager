@@ -11,6 +11,8 @@ import routing from './cloud-connect.routing';
 import service from './cloud-connect.service';
 import unlockPort from './unlock-port';
 
+import datacenterAdd from './datacenter/add';
+
 const moduleName = 'ovhCloudConnect';
 
 angular
@@ -20,6 +22,7 @@ angular
     editDescription,
     lockPort,
     removePopConfiguration,
+    datacenterAdd,
     removeVrack,
     unlockPort,
   ])

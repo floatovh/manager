@@ -1,0 +1,53 @@
+<form id="addDcForm" data-ng-submit="$ctrl.create()">
+    <oui-modal
+        data-title="{{:: 'cloud_connect_datacenter_add_title' | translate}}"
+        data-on-dismiss="$ctrl.goBack()"
+        data-primary-label="{{:: 'cloud_connect_common_create' | translate}}"
+        data-primary-action="$ctrl.create()"
+        data-secondary-action="$ctrl.goBack()"
+        data-secondary-label="{{:: 'cloud_connect_common_cancel' | translate}}"
+        data-loading="$ctrl.isLoading"
+    >
+        <span data-tanslate="cloud_connect_datacenter_add_description"></span>
+        <oui-field
+            data-label="{{:: 'cloud_connect_datacenter_add_select_title' | translate }}"
+            data-size="m"
+        >
+            <oui-select
+                data-name="dc"
+                data-model="$ctrl.model.datacenterId"
+                data-placeholder="{{:: 'cloud_connect_datacenter_add_select_placeholder' | translate }}"
+                data-items="$ctrl.datacenters"
+                data-required
+            >
+            </oui-select>
+        </oui-field>
+        <oui-field
+            data-size="m"
+            data-label="{{::'cloud_connect_datacenter_add_select_asn' | translate}}"
+        >
+            <input
+                type="text"
+                id="asn"
+                name="asn"
+                class="oui-input"
+                data-ng-model="$ctrl.model.ovhBgpArea"
+                required
+            />
+        </oui-field>
+        <oui-field
+            data-size="m"
+            data-label="{{::'cloud_connect_datacenter_add_network_address' | translate}}"
+        >
+            <input
+                type="text"
+                id="asn"
+                name="asn"
+                class="oui-input"
+                data-ng-model="$ctrl.model.subnet"
+                data-placeholder="{{:: 'cloud_connect_datacenter_add_network_address_placeholder' | translate }}"
+                required
+            />
+        </oui-field>
+    </oui-modal>
+</form>

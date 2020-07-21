@@ -24,6 +24,7 @@ export default class CloudConnectService {
       interface: this.$cacheFactory('CLOUD_CONNECT_INTERFACE'),
       serviceKeys: this.$cacheFactory('SERVICE_KEYS'),
       serviceKeyIds: this.$cacheFactory('SERVICE_KEY_IDS'),
+      datacenter: this.$cacheFactory('CLOUD_CONNECT_DATACENTER'),
     };
   }
 
@@ -98,9 +99,11 @@ export default class CloudConnectService {
             map(res.data, (popConfigId) => {
               return this.$http
                 .get(
-                  `/ovhCloudConnect/${cloudConnect.uuid}/config/pop/${popConfigId}`, {
-                  cache: this.cache.popConfiguration,
-                })
+                  `/ovhCloudConnect/${cloudConnect.uuid}/config/pop/${popConfigId}`,
+                  {
+                    cache: this.cache.popConfiguration,
+                  },
+                )
                 .then((config) => {
                   cloudConnect.setPopConfiguration(config.data);
                   return config.data;
@@ -124,9 +127,11 @@ export default class CloudConnectService {
         map(cloudConnect.interfaceList, (interfaceId) => {
           return this.$http
             .get(
-              `/ovhCloudConnect/${cloudConnect.uuid}/interface/${interfaceId}`, {
-              cache: this.cache.interface,
-            })
+              `/ovhCloudConnect/${cloudConnect.uuid}/interface/${interfaceId}`,
+              {
+                cache: this.cache.interface,
+              },
+            )
             .then((res) => {
               cloudConnect.setInterface(res.data);
               return res.data;
@@ -233,6 +238,32 @@ export default class CloudConnectService {
     return this.$http.post(`/ovhCloudConnect/${serviceName}/serviceKey/${serviceKeyId}/send`);
   }
 
+  createDatacenter(serviceName, popId, data) {
+    return this.$http
+      .post(`/ovhCloudConnect/${serviceName}/config/pop/${popId}/datacenter`, {
+        data,
+      })
+      .then((res) => {
+        this.clearCache(this.cache.datacenter);
+        return res.data;
+      });
+  }
+
+  deleteDatacenter(serviceName, popId, datacenterId) {
+    return this.$http.delete(
+      `/ovhCloudConnect/${serviceName}/config/pop/${popId}/datacenter/${datacenterId}`,
+    );
+  }
+
+  getDatacenter(serviceName, popId, datacenterId) {
+    return this.$http.get(
+      `/ovhCloudConnect/${serviceName}/config/pop/${popId}/datacenter/${datacenterId}`,
+      {
+        cache: this.cache.datacenter,
+      },
+    );
+  }
+
   checkTaskStatus(serviceName, taskId) {
     return this.Poller.poll(
       `/ovhCloudConnect/${serviceName}/task/${taskId}`,
@@ -243,9 +274,10 @@ export default class CloudConnectService {
         successRule: {
           status: 'done',
         },
-      },
+      }
     );
   }
+
 
   clearCache(cacheName) {
     cacheName.removeAll();

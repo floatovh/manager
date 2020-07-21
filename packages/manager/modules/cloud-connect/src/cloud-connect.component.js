@@ -9,6 +9,7 @@ export default {
     goToLockPortPage: '<',
     goToAddPopConfigurationPage: '<',
     goToRemovePopConfigurationPage: '<',
+    goToDatacenterAdd: '<',
     goToRemoveVrackPage: '<',
     goToUnlockPortPage: '<',
     goToUpdateDescriptionPage: '<',
