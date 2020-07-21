@@ -6,7 +6,7 @@ import 'angular-translate';
 import 'oclazyload';
 import ngOvhCloudUniverseComponents from '@ovh-ux/ng-ovh-cloud-universe-components';
 
-const moduleName = 'ovhCloudConnectRemoveVrackLazyLoading';
+const moduleName = 'ovhCloudConnectAddPopConfigurationLazyLoading';
 
 angular
   .module(moduleName, [
@@ -14,16 +14,16 @@ angular
     'pascalprecht.translate',
     'ui.router',
     'oc.lazyLoad',
-    ngOvhCloudUniverseComponents
+    ngOvhCloudUniverseComponents,
   ])
   .config(
     /* @ngInject */ ($stateProvider) => {
-      $stateProvider.state('cloud-connect.remove-vrack.**', {
-        url: '/vrack/:vRackId/remove',
+      $stateProvider.state('cloud-connect.add-pop.**', {
+        url: '/pop/add',
         lazyLoad: ($transition$) => {
           const $ocLazyLoad = $transition$.injector().get('$ocLazyLoad');
 
-          return import('./remove-vrack.module').then((mod) =>
+          return import('./add-pop-configuration.module').then((mod) =>
             $ocLazyLoad.inject(mod.default || mod),
           );
         },

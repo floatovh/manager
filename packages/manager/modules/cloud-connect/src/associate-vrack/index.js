@@ -19,7 +19,7 @@ angular
   .config(
     /* @ngInject */ ($stateProvider) => {
       $stateProvider.state('cloud-connect.associate-vrack.**', {
-        url: '/associate-vrack',
+        url: '/vrack/associate',
         lazyLoad: ($transition$) => {
           const $ocLazyLoad = $transition$.injector().get('$ocLazyLoad');
 

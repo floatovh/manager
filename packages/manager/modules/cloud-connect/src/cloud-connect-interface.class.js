@@ -13,6 +13,14 @@ export default class CloudConnectInterface {
     return this.status === 'enabled';
   }
 
+  disable() {
+    return this.status === 'disabled';
+  }
+
+  enable() {
+    return this.status === 'enabled';
+  }
+
   isOutgoingLightStatusUp() {
     return this.outgoingLightStatus === 'up';
   }

@@ -1,7 +1,7 @@
 export default /* @ngInject */ ($stateProvider) => {
   $stateProvider
     .state('cloud-connect.remove-vrack', {
-      url: '/remove-vrack',
+      url: '/vrack/:vRackId/remove',
       views: {
         modal: {
           component: 'cloudConnectRemoveVrack',
@@ -11,9 +11,6 @@ export default /* @ngInject */ ($stateProvider) => {
       translations: {
         value: ['.'],
         format: 'json',
-      },
-      params: {
-        vRackId: null,
       },
       resolve: {
         goBack: /* @ngInject */ (goToCloudConnectPage) => goToCloudConnectPage,

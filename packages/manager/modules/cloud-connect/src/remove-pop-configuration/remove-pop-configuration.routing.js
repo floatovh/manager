@@ -1,9 +1,9 @@
 export default /* @ngInject */ ($stateProvider) => {
-  $stateProvider.state('cloud-connect.pop-configuration', {
-    url: '/pop-configuration',
+  $stateProvider.state('cloud-connect.remove-pop', {
+    url: '/pop/:popId/remove',
     views: {
       modal: {
-        component: 'cloudConnectPopConfiguration',
+        component: 'cloudConnectRemovePopConfiguration',
       },
     },
     layout: 'modal',
@@ -12,13 +12,13 @@ export default /* @ngInject */ ($stateProvider) => {
       format: 'json',
     },
     params: {
-      interfaceId: null,
+      interfaceId: false,
     },
     resolve: {
+      popId: /* @ngInject */ ($transition$) =>
+        $transition$.params().popId,
       interfaceId: /* @ngInject */ ($transition$) =>
         $transition$.params().interfaceId,
-      popTypes: /* @ngInject */ (cloudConnectService) =>
-        cloudConnectService.getPopTypes(),
       goBack: /* @ngInject */ (goToCloudConnectPage) => goToCloudConnectPage,
     },
   });

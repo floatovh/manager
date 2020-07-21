@@ -1,4 +1,4 @@
-import controller from './pop-configuration.controller';
+import controller from './add-pop-configuration.controller';
 import template from './template.html';
 
 export default {

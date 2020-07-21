@@ -1,0 +1,66 @@
+<form
+    id="popConfiguration"
+    name="popConfiguration"
+    data-ng-submit="popConfiguration.$valid && $ctrl.configurePop()"
+    novalidate
+>
+    <oui-modal
+        data-heading="{{ 'cloud_connect_pop_configure_title' | translate }}"
+        data-primary-label="{{:: 'cloud_connect_create' | translate }}"
+        data-primary-disabled="$ctrl.isLoading"
+        data-secondary-action="$ctrl.goBack()"
+        data-secondary-label="{{:: 'cloud_connect_cancel' | translate }}"
+        data-on-dismiss="$ctrl.goBack()"
+        data-loading="$ctrl.isLoading"
+    >
+        <p data-translate="cloud_connect_pop_configure_description"></p>
+
+        <oui-field data-label="{{ ::'cloud_connect_type' | translate }}">
+            <oui-select
+                name="popType"
+                data-model="$ctrl.popType"
+                data-items="$ctrl.popTypes"
+                data-match="name"
+                data-placeholder="{{ ::'cloud_connect_pop_configure_pop_select_type' | translate }}"
+                data-required
+            >
+                <span data-ng-bind="$item.name"></span>
+            </oui-select>
+        </oui-field>
+        <div data-ng-if="$ctrl.popType && $ctrl.popType.id === 'l3'">
+            <oui-field data-label="{{ ::'cloud_connect_asn_type' | translate }}">
+                <input
+                    class="oui-input"
+                    type="number"
+                    id="asn-type"
+                    name="asn-type"
+                    data-ng-model="$ctrl.pop.customerBgpArea"
+                    required
+                    placeholder="{{ ::'cloud_connect_asn_type_placeholder' | translate }}"
+                >
+            </oui-field>
+            <oui-field data-label="{{ ::'cloud_connect_asn_ovh_cloud' | translate }}">
+                <input
+                    class="oui-input"
+                    type="number"
+                    id="asn-ovhcloud"
+                    name="asn-ovhcloud"
+                    data-ng-model="$ctrl.pop.ovhBgpArea"
+                    required
+                    placeholder="{{ ::'cloud_connect_asn_ovh_cloud_placeholder' | translate }}"
+                >
+            </oui-field>
+            <oui-field data-label="{{ ::'cloud_connect_network_address' | translate }}">
+                <input
+                    class="oui-input"
+                    type="text"
+                    id="network-address"
+                    name="network-address"
+                    data-ng-model="$ctrl.pop.subnet"
+                    required
+                    placeholder="{{ ::'cloud_connect_network_address_placeholder' | translate }}"
+                >
+            </oui-field>
+        </div>
+    </oui-modal>
+</form>

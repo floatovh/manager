@@ -1,6 +1,6 @@
 import get from 'lodash/get';
 
-export default class PopConfigurationCtrl {
+export default class RemovePopConfigurationCtrl {
   /* @ngInject */
   constructor($translate, cloudConnectService) {
     this.$translate = $translate;
@@ -11,18 +11,18 @@ export default class PopConfigurationCtrl {
     this.isLoading = false;
   }
 
-  configurePop() {
+  removePopConfigure() {
     this.isLoading = true;
     this.cloudConnectService
-      .addPopConfiguration(
+      .removePopConfiguration(
         this.cloudConnectId,
+        this.popId,
         this.interfaceId,
-        this.popType.id,
       )
       .then(() => this.goBack(null, 'success', true))
       .catch((error) =>
         this.goBack(
-          this.$translate.instant('cloud_connect_pop_add_configuration_error', {
+          this.$translate.instant('cloud_connect_pop_remove_configuration_error', {
             message: get(error, 'data.message', error.message),
           }),
           'error',

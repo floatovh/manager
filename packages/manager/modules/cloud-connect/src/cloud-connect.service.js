@@ -1,4 +1,5 @@
 import find from 'lodash/find';
+import filter from 'lodash/filter';
 import forOwn from 'lodash/forOwn';
 import map from 'lodash/map';
 
@@ -8,35 +9,28 @@ import { POP_TYPES } from './cloud-connect.constants';
 
 export default class CloudConnectService {
   /* @ngInject */
-  constructor($cacheFactory, $q, $http, OvhApiVrack) {
+  constructor($cacheFactory, $q, $http, Poller, OvhApiVrack) {
     this.$cacheFactory = $cacheFactory;
     this.$q = $q;
     this.$http = $http;
+    this.Poller = Poller;
     this.OvhApiVrack = OvhApiVrack;
     this.POP_TYPES = POP_TYPES;
     this.cache = {
-      serviceInfo: 'CLOUD_CONNECT_SERVICE_INFOS',
-      popConfigurationList: 'CLOUD_CONNECT_POP_CONFIGURATION_LIST',
-      popConfiguration: 'CLOUD_CONNECT_POP_CONFIGURATION',
-      interface: 'CLOUD_CONNECT_INTERFACE',
+      cloudConnect: this.$cacheFactory('CLOUD_CONNECT'),
+      serviceInfo: this.$cacheFactory('CLOUD_CONNECT_SERVICE_INFOS'),
+      popConfigurationList: this.$cacheFactory('CLOUD_CONNECT_POP_CONFIGURATION_LIST'),
+      popConfiguration: this.$cacheFactory('CLOUD_CONNECT_POP_CONFIGURATION'),
+      interface: this.$cacheFactory('CLOUD_CONNECT_INTERFACE'),
+      serviceKeys: this.$cacheFactory('SERVICE_KEYS'),
+      serviceKeyIds: this.$cacheFactory('SERVICE_KEY_IDS'),
     };
   }
 
   getCloudConnect(cloudConnectId) {
-    // return this.OvhHttp.get('/ovhCloudConnect/{serviceName}', {
-    //   rootPath: 'apiv6',
-    //   cache: cache.cloudConnect,
-    //   urlParams: {
-    //     serviceName: cloudConnectId,
-    //   },
-    // });
-    if (!cloudConnectId) {
-      return this.$q.reject('Unknown Cloud Connect');
-    }
-    if (this.cloudConnect && this.cloudConnect.uuid === cloudConnectId) {
-      return this.$q.when(this.cloudConnect);
-    }
-    return this.$http.get(`/ovhCloudConnect/${cloudConnectId}`).then((res) => {
+    return this.$http.get(`/ovhCloudConnect/${cloudConnectId}`, {
+      cache: this.cache.cloudConnect,
+    }).then((res) => {
       this.cloudConnect = new CloudConnect(res.data);
       return this.cloudConnect;
     });
@@ -75,12 +69,20 @@ export default class CloudConnectService {
     return this.OvhApiVrack.v6().allowedServices({ serviceName: vRackId });
   }
 
-  getPopTypes() {
+  getAllPopTypes() {
     return this.POP_TYPES;
   }
 
+  getSupportedPopTypes(isProviderService) {
+    if (isProviderService) {
+      return filter(this.getAllPopTypes(), type => type.id !== 'l2');
+    } else {
+      return this.getAllPopTypes();
+    }
+  }
+
   getPopTypeName(typeId) {
-    const type = find(this.getPopTypes(), type => type.id === typeId);
+    const type = find(this.getAllPopTypes(), type => type.id === typeId);
     return type ? type.name : typeId;
   }
 
@@ -137,12 +139,31 @@ export default class CloudConnectService {
       });
   }
 
-  addPopConfiguration(ovhCloudConnectId, interfaceId, type) {
+  addPopConfiguration(ovhCloudConnectId, interfaceId, type, pop) {
+    let options = {
+      type,
+      interfaceId,
+    };
+    if (type === 'l3') {
+      options = {
+        ...options,
+        ...pop,
+      }
+    }
     return this.$http
-      .post(`/ovhCloudConnect/${ovhCloudConnectId}/config/pop`, {
-        type,
-        interfaceId,
-      })
+      .post(`/ovhCloudConnect/${ovhCloudConnectId}/config/pop`, options)
+      .then((task) => this.checkTaskStatus(ovhCloudConnectId, task.data.id))
+      .then((res) => {
+        this.clearCache(this.cache.popConfigurationList);
+        this.clearCache(this.cache.popConfiguration);
+        return res.data;
+      });
+  }
+
+  removePopConfiguration(ovhCloudConnectId, popId, interfaceId) {
+    return this.$http
+      .delete(`/ovhCloudConnect/${ovhCloudConnectId}/config/pop/${popId}`)
+      .then((task) => this.checkTaskStatus(ovhCloudConnectId, task.data.id))
       .then((res) => {
         this.clearCache(this.cache.popConfigurationList);
         this.clearCache(this.cache.popConfiguration);
@@ -168,11 +189,66 @@ export default class CloudConnectService {
     });
   }
 
+  lockInterface(serviceName, interfaceId) {
+    return this.$http.post(`/ovhCloudConnect/${serviceName}/interface/${interfaceId}/lock`)
+    .then((task) => this.checkTaskStatus(serviceName, task.data.id))
+    .then(() => this.clearCache(this.cache.interface));
+  }
+
+  unlockInterface(serviceName, interfaceId) {
+    return this.$http.post(`/ovhCloudConnect/${serviceName}/interface/${interfaceId}/unlock`)
+    .then((task) => this.checkTaskStatus(serviceName, task.data.id))
+    .then(() => this.clearCache(this.cache.interface));
+  }
+
+  getServiceKey(serviceName) {
+    return this.$http.get(`/ovhCloudConnect/${serviceName}/serviceKey`, {
+      cache: this.cache.serviceKey,
+    });
+  }
+
+  loadServiceKeys(cloudConnect) {
+    cloudConnect.setLoadingServiceKeys(true);
+    return this.$http.get(`/ovhCloudConnect/${cloudConnect.uuid}/serviceKey`, {
+      cache: this.cache.serviceKeyIds,
+    })
+    .then(serviceKeyIds => this.$q.all(map(
+      serviceKeyIds.data,
+      serviceKeyId => this.$http.get(`/ovhCloudConnect/${cloudConnect.uuid}/serviceKey/${serviceKeyId}`,{
+        cache: this.cache.serviceKeys,
+      })
+        .then(serviceKey => serviceKey.data),
+    )))
+    .then(serviceKeys => cloudConnect.setServiceKeys(serviceKeys))
+    .finally(() => {
+      cloudConnect.setLoadingServiceKeys(false);
+    });
+  }
+
+  regenerateServiceKey(serviceName, serviceKeyId) {
+    return this.$http.post(`/ovhCloudConnect/${serviceName}/serviceKey/${serviceKeyId}/regenerate`);
+  }
+
+  sendServiceKey(serviceName, serviceKeyId) {
+    return this.$http.post(`/ovhCloudConnect/${serviceName}/serviceKey/${serviceKeyId}/send`);
+  }
+
+  checkTaskStatus(serviceName, taskId) {
+    return this.Poller.poll(
+      `/ovhCloudConnect/${serviceName}/task/${taskId}`,
+      {},
+      {
+        method: 'get',
+        retryMaxAttempts: 10,
+        successRule: {
+          status: 'done',
+        },
+      },
+    );
+  }
+
   clearCache(cacheName) {
-    const cacheInstance = this.$cacheFactory.get(cacheName);
-    if (cacheInstance) {
-      cacheInstance.removeAll();
-    }
+    cacheName.removeAll();
   }
 
   clearAllCache() {

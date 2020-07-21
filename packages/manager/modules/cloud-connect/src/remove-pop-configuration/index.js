@@ -6,7 +6,7 @@ import 'angular-translate';
 import 'oclazyload';
 import ngOvhCloudUniverseComponents from '@ovh-ux/ng-ovh-cloud-universe-components';
 
-const moduleName = 'ovhCloudConnectPopConfigurationLazyLoading';
+const moduleName = 'ovhCloudConnectRemovePopConfigurationLazyLoading';
 
 angular
   .module(moduleName, [
@@ -18,12 +18,12 @@ angular
   ])
   .config(
     /* @ngInject */ ($stateProvider) => {
-      $stateProvider.state('cloud-connect.pop-configuration.**', {
-        url: '/pop-configuration',
+      $stateProvider.state('cloud-connect.remove-pop.**', {
+        url: '/pop/:popId/remove',
         lazyLoad: ($transition$) => {
           const $ocLazyLoad = $transition$.injector().get('$ocLazyLoad');
 
-          return import('./pop-configuration.module').then((mod) =>
+          return import('./remove-pop-configuration.module').then((mod) =>
             $ocLazyLoad.inject(mod.default || mod),
           );
         },

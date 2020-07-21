@@ -8,8 +8,13 @@ export default class CloudConnect {
     Object.assign(this, cloudConnect);
     this.loadingPopConfiguration = false;
     this.loadingInterface = false;
+    this.loadingServiceKeys = false;
     this.popConfiguration = {};
     this.interfaces = {};
+  }
+
+  isProviderService() {
+    return this.provider === 'OVHcloud';
   }
 
   isVrackAssociated() {
@@ -26,12 +31,30 @@ export default class CloudConnect {
     }
   }
 
+  removePopConfiguration(interfaceId) {
+    if (interfaceId) {
+      this.popConfiguration[interfaceId] = null;
+    }
+  }
+
   getPopConfiguration(interfaceId) {
     return this.popConfiguration[interfaceId];
   }
 
   setLoadingPopConfiguration(loading) {
     this.loadingPopConfiguration = loading;
+  }
+
+  setLoadingServiceKeys(loading) {
+    this.loadingServiceKeys = loading;
+  }
+
+  setServiceKeys(serviceKeys) {
+    this.serviceKeys = serviceKeys;
+  }
+
+  getServiceKeys() {
+    return this.serviceKeys;
   }
 
   isLoadingPopConfiguration() {

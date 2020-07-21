@@ -122,6 +122,26 @@
                         data-term="{{ ::'cloud_connect_number_of_ports' | translate }}"
                         data-description="{{ ::$ctrl.cloudConnect.portQuantity }}">
                     </oui-tile-definition>
+                     <!-- provider -->
+                     <oui-tile-definition
+                        data-ng-if="$ctrl.cloudConnect.isProviderService()"
+                        data-term="{{ ::'cloud_connect_provider' | translate }}"
+                        data-description="{{ ::$ctrl.cloudConnect.provider }}">
+                        <oui-action-menu data-compact data-align="end">
+                            <oui-action-menu-item
+                                data-on-click="$ctrl.goToSendServiceKey($ctrl.cloudConnect.provider)"
+                                data-text="{{ ::'cloud_connect_provider_send_service_key' | translate }}"
+                            ></oui-action-menu-item>
+                            <oui-action-menu-item
+                                data-on-click="$ctrl.goToGenerateServiceKey($ctrl.cloudConnect.provider)"
+                                data-text="{{ ::'cloud_connect_provider_generate_service_key' | translate }}"
+                            ></oui-action-menu-item>
+                            <oui-action-menu-item
+                                data-on-click="$ctrl.goToShowServiceKey($ctrl.cloudConnect.provider)"
+                                data-text="{{ ::'cloud_connect_provider_show_service_key' | translate }}"
+                            ></oui-action-menu-item>
+                        </oui-action-menu>
+                    </oui-tile-definition>
                 </div>
             </div>
 
@@ -138,12 +158,15 @@
                             data-translate="cloud_connect_pop_configure">
                         </h4>
                         <oui-action-menu
-                            data-ng-if="!$ctrl.cloudConnect.isLoadingPop() && $ctrl.cloudConnect.isPopConfigured(interfaceId)"
+                            data-ng-if="!$ctrl.cloudConnect.isLoadingPop()
+                                && $ctrl.cloudConnect.isPopConfigured(interfaceId)
+                                && !$ctrl.cloudConnect.getPopConfiguration(interfaceId).isInProcess()"
                             data-compact
                             data-align="end"
                             class="ml-auto">
                             <oui-action-menu-item
-                                data-text="{{ ::'cloud_connect_pop_configure_delete' | translate }}">
+                                data-text="{{ ::'cloud_connect_pop_configure_delete' | translate }}"
+                                data-on-click="$ctrl.goToRemovePopConfigurationPage(interfaceId)">
                             </oui-action-menu-item>
                         </oui-action-menu>
                     </div>
@@ -162,7 +185,7 @@
                             <oui-button
                                 data-variant="primary"
                                 data-text="{{ ::'cloud_connect_pop_configure_add' | translate }}"
-                                data-ng-click="$ctrl.goToPopConfigurationPage(interfaceId)"
+                                data-ng-click="$ctrl.goToAddPopConfigurationPage(interfaceId)"
                             >
                             </oui-button>
                         </oui-tile-description>
@@ -207,13 +230,33 @@
                                 class="ml-auto">
                                 <oui-action-menu-item
                                     data-ng-if="$interface.isEnabled()"
-                                    data-text="{{ ::'cloud_connect_pop_port_block' | translate }}">
+                                    data-text="{{ ::'cloud_connect_pop_port_block' | translate }}"
+                                    data-on-click="$ctrl.goToLockPortPage(interfaceId)">
                                 </oui-action-menu-item>
                                 <oui-action-menu-item
                                     data-ng-if="!$interface.isEnabled()"
-                                    data-text="{{ ::'cloud_connect_pop_port_unblock' | translate }}">
+                                    data-text="{{ ::'cloud_connect_pop_port_unblock' | translate }}"
+                                    data-on-click="$ctrl.goToUnlockPortPage(interfaceId)">
                                 </oui-action-menu-item>
                             </oui-action-menu>
+                        </oui-tile-definition>
+                        <!-- ASN client -->
+                        <oui-tile-definition
+                            data-ng-if="$ctrl.cloudConnect.isProviderService()"
+                            data-term="{{ ::'cloud_connect_asn_type' | translate }}"
+                            data-description="{{ ::$pop.customerBgpArea }}">
+                        </oui-tile-definition>
+                        <!-- ASN OVHcloud -->
+                        <oui-tile-definition
+                            data-ng-if="$ctrl.cloudConnect.isProviderService()"
+                            data-term="{{ ::'cloud_connect_asn_ovh_cloud' | translate }}"
+                            data-description="{{ ::$pop.ovhBgpArea }}">
+                        </oui-tile-definition>
+                         <!-- network address -->
+                         <oui-tile-definition
+                            data-ng-if="$ctrl.cloudConnect.isProviderService()"
+                            data-term="{{ ::'cloud_connect_network' | translate }}"
+                            data-description="{{ ::$pop.subnet }}">
                         </oui-tile-definition>
                         <!-- optique status -->
                         <oui-tile-definition data-term="{{ ::'cloud_connect_pop_interface_status' | translate }}">

@@ -21,6 +21,9 @@ export default class CloudConnectCtrl {
       this.loadPopConfiguration();
       this.loadInterface();
     }
+    if(this.cloudConnect.isProviderService()) {
+      this.loadServiceKeys();
+    }
   }
 
   loadMessages() {
@@ -51,7 +54,7 @@ export default class CloudConnectCtrl {
       .loadPopConfiguration(this.cloudConnect)
       .catch((error) =>
         this.CucCloudMessage.error(
-          this.$translate.instant('cloud_connect_get_pop_configuration_error', {
+          this.$translate.instant('cloud_connect_pop_get_configuration_error', {
             message: get(error, 'data.message', error.message),
           }),
         ),
@@ -64,6 +67,18 @@ export default class CloudConnectCtrl {
       .catch((error) =>
         this.CucCloudMessage.error(
           this.$translate.instant('cloud_connect_pop_get_configuration_error', {
+            message: get(error, 'data.message', error.message),
+          }),
+        ),
+      );
+  }
+
+  loadServiceKeys() {
+    this.cloudConnectService
+      .loadServiceKeys(this.cloudConnect)
+      .catch((error) =>
+        this.CucCloudMessage.error(
+          this.$translate.instant('cloud_connect_service_key_get_error', {
             message: get(error, 'data.message', error.message),
           }),
         ),
