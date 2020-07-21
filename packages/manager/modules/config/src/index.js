@@ -1,5 +1,7 @@
-import _Environment from './environment';
 import 'whatwg-fetch';
+
+import _Environment from './environment';
+import getUserLocale from './locale';
 
 export const HOSTNAME_REGIONS = {
   'www.ovh.com': 'EU',
@@ -29,7 +31,10 @@ export const fetchConfiguration = () => {
     })
     .then((config) => {
       _Environment.setRegion(config.region);
-      return config;
+      return {
+        ...config,
+        language: getUserLocale(config),
+      };
     })
     .catch(() => ({
       region: HOSTNAME_REGIONS[window.location.hostname],
