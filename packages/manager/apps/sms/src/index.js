@@ -6,7 +6,11 @@ import 'script-loader!moment/min/moment.min';
 
 import angular from 'angular';
 
+import { Environment, detectUserLocale } from '@ovh-ux/manager-config';
+
 import ngOvhApiWrappers from '@ovh-ux/ng-ovh-api-wrappers';
 import ovhManagerSms from '@ovh-ux/manager-sms';
+
+Environment.setUserLocale(detectUserLocale());
 
 angular.module('smsApp', [ngOvhApiWrappers, ovhManagerSms]);

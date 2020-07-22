@@ -5,6 +5,8 @@ import 'script-loader!moment/min/moment-with-locales.min';
 
 import angular from 'angular';
 
+import { Environment, detectUserLocale } from '@ovh-ux/manager-config';
+
 // Module dependencies.
 import ovhManagerCarrierSip from '@ovh-ux/manager-carrier-sip';
 import uiRouter from '@uirouter/angularjs';
@@ -18,6 +20,8 @@ import { momentConfiguration } from './config';
 
 // Styles.
 import '@ovh-ux/ui-kit/dist/css/oui.css';
+
+Environment.setUserLocale(detectUserLocale());
 
 angular
   .module('carrierSipApp', [cdr, endpoints, ovhManagerCarrierSip, uiRouter])

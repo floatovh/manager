@@ -4,9 +4,10 @@ import 'script-loader!moment/min/moment-with-locales.min'; // eslint-disable-lin
 import angular from 'angular';
 import ovhManagerCore from '@ovh-ux/manager-core';
 import ovhManagerVeeamCloudConnect from '@ovh-ux/manager-veeam-cloud-connect';
-import { Environment } from '@ovh-ux/manager-config';
+import { Environment, detectUserLocale } from '@ovh-ux/manager-config';
 
 Environment.setRegion(__WEBPACK_REGION__);
+Environment.setUserLocale(detectUserLocale());
 
 angular
   .module('veeamCloudConnectApp', [ovhManagerCore, ovhManagerVeeamCloudConnect])

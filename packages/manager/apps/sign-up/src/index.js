@@ -1,5 +1,9 @@
 // set environment
-import { Environment, findLanguage } from '@ovh-ux/manager-config';
+import {
+  Environment,
+  detectUserLocale,
+  findLanguage,
+} from '@ovh-ux/manager-config';
 
 /* eslint-disable import/no-webpack-loader-syntax, import/extensions */
 import 'script-loader!jquery';
@@ -30,6 +34,7 @@ import '@ovh-ux/ui-kit/dist/css/oui.css';
 import './index.scss';
 
 Environment.setRegion(__WEBPACK_REGION__);
+Environment.setUserLocale(detectUserLocale());
 
 angular
   .module(

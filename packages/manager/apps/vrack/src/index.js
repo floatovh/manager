@@ -9,9 +9,12 @@ import 'script-loader!messenger/build/js/messenger-theme-flat.js';
 /* eslint-enable import/no-webpack-loader-syntax, import/extensions */
 
 import angular from 'angular';
+import { Environment, detectUserLocale } from '@ovh-ux/manager-config';
 import ovhManagerVrack from '@ovh-ux/manager-vrack';
 
 import './index.scss';
+
+Environment.setUserLocale(detectUserLocale());
 
 angular.module('vrackApp', [ovhManagerVrack]).config(
   /* @ngInject */ ($qProvider) => {

@@ -4,7 +4,7 @@ import has from 'lodash/has';
 import uiRouter, { RejectType } from '@uirouter/angularjs';
 import isString from 'lodash/isString';
 
-import { Environment } from '@ovh-ux/manager-config';
+import { Environment, detectUserLocale } from '@ovh-ux/manager-config';
 import ovhManagerCore from '@ovh-ux/manager-core';
 import ngAtInternet from '@ovh-ux/ng-at-internet';
 import ngAtInternetUiRouterPlugin from '@ovh-ux/ng-at-internet-ui-router-plugin';
@@ -42,6 +42,7 @@ import cloudUniverseComponents from '../cloudUniverseComponents';
 import errorPage from './error/error.module';
 
 Environment.setRegion(__WEBPACK_REGION__);
+Environment.setUserLocale(detectUserLocale());
 
 angular
   .module(

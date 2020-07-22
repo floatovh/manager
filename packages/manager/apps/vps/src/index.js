@@ -6,7 +6,7 @@ import 'script-loader!jsurl/lib/jsurl';
 import 'script-loader!bootstrap/dist/js/bootstrap';
 /* eslint-enable import/extensions, import/no-webpack-loader-syntax */
 
-import { Environment } from '@ovh-ux/manager-config';
+import { Environment, detectUserLocale } from '@ovh-ux/manager-config';
 
 import angular from 'angular';
 import cloudUniverseComponents from '@ovh-ux/ng-ovh-cloud-universe-components';
@@ -18,6 +18,7 @@ import { momentConfiguration } from './config';
 import 'ovh-ui-kit-bs/dist/css/oui-bs3.css';
 
 Environment.setRegion(__WEBPACK_REGION__);
+Environment.setUserLocale(detectUserLocale());
 
 angular
   .module('vpsApp', [cloudUniverseComponents, ovhManagerCore, ovhManagerVps])

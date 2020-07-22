@@ -11,9 +11,12 @@ import 'script-loader!messenger/build/js/messenger-theme-flat.js';
 import angular from 'angular';
 import '@uirouter/angularjs';
 
+import { Environment, detectUserLocale } from '@ovh-ux/manager-config';
+import ovhManagerEnterpriseCloudDatabase from '@ovh-ux/manager-enterprise-cloud-database';
+
 import './index.scss';
 
-import ovhManagerEnterpriseCloudDatabase from '@ovh-ux/manager-enterprise-cloud-database';
+Environment.setUserLocale(detectUserLocale());
 
 angular.module('enterpriseCloudDatabaseApp', [
   'ui.router',

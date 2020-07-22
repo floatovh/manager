@@ -66,8 +66,6 @@ angular
   .constant('CORE_URLS', URLS)
   .factory('TranslateInterceptor', translateFactory)
   .config(($translateProvider, translatePluggableLoaderProvider) => {
-    Environment.setUserLocale(detectUserLocale());
-
     const defaultLanguage = Environment.getUserLocale();
 
     $translateProvider.useLoader('translatePluggableLoader');
@@ -276,6 +274,10 @@ export const bootstrapApplication = () => {
     }))
     .then((configuration) => {
       Environment.setRegion(configuration.region);
-      return configuration;
+      Environment.setUserLocale(detectUserLocale());
+      return {
+        ...configuration,
+        locale: Environment.getUserLocale(),
+      };
     });
 };
