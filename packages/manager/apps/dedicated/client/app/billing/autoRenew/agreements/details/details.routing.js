@@ -1,3 +1,5 @@
+import toInteger from 'lodash/toInteger';
+
 import template from './user-agreements-details.html';
 
 export default /* @ngInject */ (
@@ -11,6 +13,10 @@ export default /* @ngInject */ (
       template,
       controller: 'UserAccount.controllers.agreements.details',
       controllerAs: 'ctrl',
+      resolve: {
+        agreementId: /* @ngInject */ ($transition$) =>
+          toInteger($transition$.params().id),
+      },
     });
 
     // ensure compatibility with links sended by emails
