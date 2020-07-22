@@ -8,9 +8,6 @@ export default class SmsCtrl extends ListLayoutHelper.ListLayoutCtrl {
   }
 
   $onInit() {
-    this.datagridId = 'dg-sms';
-    this.defaultFilterColumn = 'name';
-
     super.$onInit();
 
     this.filtersOptions = {
