@@ -1,7 +1,7 @@
 import isString from 'lodash/isString';
 
-/* eslint-disable import/extensions */
-import TranslateService from '@ovh-ux/manager-core/src/translate/translate.service';
+// eslint-disable-next-line import/extensions
+import { convertFromOVHToBCP47 } from '@ovh-ux/manager-filters/helpers/helpers';
 
 import { PRICING_MODES } from './upscale.constants';
 
@@ -19,7 +19,7 @@ export default class {
    * @param {string} language Formatted the OVHcloud way
    */
   static buildPriceToDisplay({ value, currency }, language) {
-    const bcp47Language = TranslateService.convertFromOVHToBCP47(language);
+    const bcp47Language = convertFromOVHToBCP47(language);
 
     return Intl.NumberFormat(bcp47Language, {
       style: 'currency',
