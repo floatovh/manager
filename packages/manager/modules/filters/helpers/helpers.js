@@ -35,7 +35,17 @@ export function getValueFromUnit(fromUnit, value, toBinary = false) {
   return value;
 }
 
+/**
+ * BCP 47 (also known as IETF language tag) is an international standard to identify human languages
+ * @param {string} language The language to convert, in the OVHcloud format (i.e.: 'fr_FR')
+ * @returns {string} The languag converted to BCP 47 (i.e.: 'fr-FR')
+ */
+export const convertFromOVHToBCP47 = (language) => {
+  return language.replace('_', '-');
+};
+
 export default {
   convertUnit,
   getValueFromUnit,
+  convertFromOVHToBCP47,
 };
