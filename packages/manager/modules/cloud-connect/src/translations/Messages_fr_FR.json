@@ -61,6 +61,7 @@
   "cloud_connect_pop_status_active": "Actif",
   "cloud_connect_pop_status_init": "Initialisation",
   "cloud_connect_pop_status_toDelete": "Suppression",
+  "cloud_connect_status_toDelete": "Suppression",
   "cloud_connect_pop_port_lock": "Lock du port",
   "cloud_connect_pop_port_block": "Bloquer le port",
   "cloud_connect_pop_port_unblock": "Débloquer le port",

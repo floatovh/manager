@@ -15,7 +15,8 @@
         >
             <oui-select
                 data-name="dc"
-                data-model="$ctrl.model.datacenter"
+                data-model="$ctrl.datacenter"
+                data-match="name"
                 data-placeholder="{{:: 'cloud_connect_datacenter_add_select_placeholder' | translate }}"
                 data-items="$ctrl.datacenters"
                 data-required
@@ -24,6 +25,7 @@
         </oui-field>
         <oui-field
             data-size="m"
+            data-ng-if="$ctrl.cloudConnect.popType === 'l3'"
             data-label="{{::'cloud_connect_datacenter_add_select_asn' | translate}}"
         >
             <input
@@ -31,12 +33,13 @@
                 id="asn"
                 name="asn"
                 class="oui-input"
-                data-ng-model="$ctrl.model.ovhBgpArea"
+                data-ng-model="$ctrl.ovhBgpArea"
                 required
             />
         </oui-field>
         <oui-field
             data-size="m"
+            data-ng-if="$ctrl.cloudConnect.popType === 'l3'"
             data-label="{{::'cloud_connect_datacenter_add_network_address' | translate}}"
         >
             <input
@@ -44,7 +47,7 @@
                 id="asn"
                 name="asn"
                 class="oui-input"
-                data-ng-model="$ctrl.model.subnet"
+                data-ng-model="$ctrl.subnet"
                 data-placeholder="{{:: 'cloud_connect_datacenter_add_network_address_placeholder' | translate }}"
                 required
             />
