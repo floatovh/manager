@@ -11,6 +11,8 @@ export default {
     goToRemovePopConfigurationPage: '<',
     goToDatacenterAdd: '<',
     goToDatacenterAddRouting: '<',
+    goToRemoveDatacenterConfiguration: '<',
+    goToRemoveRouting: '<',
     goToRemoveVrackPage: '<',
     goToUnlockPortPage: '<',
     goToUpdateDescriptionPage: '<',

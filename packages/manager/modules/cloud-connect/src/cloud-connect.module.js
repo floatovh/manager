@@ -16,6 +16,7 @@ import viewServiceKey from './view-service-key';
 
 import datacenterAdd from './datacenter/add';
 import datacenterAddRouting from './datacenter/add-routing';
+import removeDatacenterConfiguration from './datacenter/remove-datacenter';
 
 const moduleName = 'ovhCloudConnect';
 
@@ -28,6 +29,7 @@ angular
     editDescription,
     lockPort,
     regenerateServiceKey,
+    removeDatacenterConfiguration,
     removePopConfiguration,
     removeVrack,
     unlockPort,

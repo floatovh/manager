@@ -30,7 +30,8 @@
                         <oui-spinner
                             class="ml-auto"
                             data-ng-if="$ctrl.downloadingLoa"
-                            data-size="s">
+                            data-size="s"
+                        >
                         </oui-spinner>
                         <oui-action-menu
                             data-compact
@@ -95,7 +96,10 @@
                         <oui-tile-description
                             data-ng-if="$ctrl.cloudConnect.isVrackAssociated()"
                         >
-                            <oui-spinner data-size="s" data-ng-if="$ctrl.loadingVrack"></oui-spinner>
+                            <oui-spinner
+                                data-size="s"
+                                data-ng-if="$ctrl.loadingVrack"
+                            ></oui-spinner>
                             <span
                                 data-ng-if="!$ctrl.loadingVrack"
                                 data-ng-bind="$ctrl.cloudConnect.vrackName"
@@ -143,8 +147,13 @@
                     <oui-tile-definition
                         data-ng-if="$ctrl.cloudConnect.isProviderService()"
                         data-term="{{ ::'cloud_connect_provider' | translate }}"
-                        data-description="{{ ::$ctrl.cloudConnect.provider }}">
-                        <oui-action-menu data-compact data-align="end" data-disabled="$ctrl.cloudConnect.isLoadingServiceKeys()">
+                        data-description="{{ ::$ctrl.cloudConnect.provider }}"
+                    >
+                        <oui-action-menu
+                            data-compact
+                            data-align="end"
+                            data-disabled="$ctrl.cloudConnect.isLoadingServiceKeys()"
+                        >
                             <oui-action-menu-item
                                 data-on-click="$ctrl.goToSSendServiceKeyPage()"
                                 data-text="{{ ::'cloud_connect_provider_send_service_key' | translate }}"
@@ -345,7 +354,14 @@
         <div class="row d-lg-flex">
             <div class="col-sm-12 col-md-6">
                 <!-- DC tile -->
-                <oui-tile class="box-shadow-none border-0">
+                <oui-spinner
+                    data-size="m"
+                    data-ng-if="$ctrl.cloudConnect.loadingDatacenterConfig"
+                ></oui-spinner>
+                <oui-tile
+                    class="box-shadow-none border-0"
+                    data-ng-if="!$ctrl.cloudConnect.loadingDatacenterConfig"
+                >
                     <div class="d-flex flex-row">
                         <h4
                             class="flex-grow-1 oui-heading_4 oui-tile__title"
@@ -358,6 +374,7 @@
                         >
                             <oui-action-menu-item
                                 data-text="{{ ::'cloud_connect_datacenter_add_configuration' | translate }}"
+                                data-on-click="$ctrl.goToDatacenterAdd($ctrl.cloudConnect)"
                             ></oui-action-menu-item>
                         </oui-action-menu>
                     </div>
@@ -366,6 +383,7 @@
                     >
                         <oui-tile-description>
                             <oui-button
+                                data-ng-if="$ctrl.cloudConnect.datacenterConfigurations.length < 1"
                                 data-variant="primary"
                                 data-text="{{ ::'cloud_connect_dc_add_button' | translate }}"
                                 data-ng-click="$ctrl.goToDatacenterAdd($ctrl.cloudConnect)"
@@ -374,13 +392,8 @@
                         </oui-tile-description>
                     </oui-tile-definition>
                     <!-- if datacenter is configure repeat this per configuration -->
-                    <oui-spinner
-                        data-size="m"
-                        data-ng-if="$ctrl.cloudConnect.loadingDatacenterConfig"
-                    ></oui-spinner>
                     <div
                         class="oui-tile mb-3"
-                        data-ng-if="!$ctrl.cloudConnect.loadingDatacenterConfig"
                         data-ng-repeat="configuration in $ctrl.cloudConnect.datacenterConfigurations track by $index"
                     >
                         <div class="d-flex flex-row border-bottom">
@@ -437,7 +450,7 @@
                                             <span
                                                 class="oui-status"
                                                 data-ng-class="{
-                                                'oui-status_error': configuration.status === 'closed',
+                                                'oui-status_error': configuration.status === 'closed' || configuration.status === 'toDelete' ,
                                                 'oui-status_success': configuration.status === 'active'
                                             }"
                                                 data-ng-bind="'cloud_connect_status_' +  configuration.status | translate"
@@ -454,12 +467,14 @@
                                         class="float-right"
                                     >
                                         <oui-action-menu-item
+                                            data-ng-if="$ctrl.cloudConnect.popType === 'l3'"
                                             data-text="{{ ::'cloud_connect_datacenter_add_routage_configuration' | translate }}"
-                                            data-on-click="$ctrl.goToDatacenterAddRouting()"
+                                            data-on-click="$ctrl.goToDatacenterAddRouting(configuration.id)"
                                         ></oui-action-menu-item>
                                         <oui-action-menu-item
+                                            data-ng-if="configuration.status !== 'toDelete'"
                                             data-text="{{ ::'cloud_connect_delete' | translate }}"
-                                            data-on-click="$ctrl.removeDatacenter()"
+                                            data-on-click="$ctrl.goToRemoveDatacenterConfiguration(configuration.id)"
                                         ></oui-action-menu-item>
                                     </oui-action-menu>
                                 </li>

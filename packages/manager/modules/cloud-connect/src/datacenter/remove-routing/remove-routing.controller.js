@@ -1,31 +1,30 @@
 import get from 'lodash/get';
 
-export default class CloudConnectEditDescriptionCtrl {
+export default class RemoveVrackCtrl {
   /* @ngInject */
-  constructor($state, $translate, cloudConnectService) {
-    this.$state = $state;
+  constructor($translate, cloudConnectService) {
     this.$translate = $translate;
     this.cloudConnectService = cloudConnectService;
   }
 
-  create() {
+  $onInit() {
+    this.isLoading = false;
+  }
+
+  removeRouting() {
     this.isLoading = true;
-    return this.cloudConnectService
-      .createDatacenter(this.cloudConnect, {
-        ovhBgpArea: this.ovhBgpArea,
-        datacenterId: this.datacenter.id,
-        subnet: this.subnet,
-      })
+    this.cloudConnectService
+      .removeRouting(this.cloudConnect, this.datacenterId, this.extraId)
       .then(() => {
         return this.goBack(
-          this.$translate.instant('cloud_connect_datacenter_add_success'),
+          this.$translate.instant('cloud_connect_remove_success'),
           'success',
           true,
         );
       })
       .catch((error) =>
         this.goBack(
-          this.$translate.instant('cloud_connect_datacenter_add_error', {
+          this.$translate.instant('cloud_connect_remove_error', {
             message: get(error, 'data.message', error.message),
           }),
           'error',

@@ -17,9 +17,10 @@
         >
             <oui-select
                 data-name="tpye"
-                data-model="$ctrl.model.type"
+                data-model="$ctrl.type"
                 data-placeholder="{{:: 'cloud_connect_datacenter_add_routing_select_placeholder' | translate }}"
-                data-items="$ctrl.type"
+                data-items="$ctrl.ROUTING_TYPES"
+                data-match="name"
                 data-required
                 ><span data-ng-bind="$item.name"></span>
             </oui-select>
@@ -33,21 +34,21 @@
                 id="asn"
                 name="asn"
                 class="oui-input"
-                data-ng-model="$ctrl.model.ovhBgpArea"
+                data-ng-model="$ctrl.bgpNeighborArea"
                 required
             />
         </oui-field>
         <oui-field
             data-size="m"
-            data-label="{{::'cloud_connect_datacenter_add_routing_neighbor_address' | translate}}"
+            data-label="{{::'cloud_connect_datacenter_add_routing_network_neighbor' | translate}}"
         >
             <input
                 type="text"
                 id="asn"
                 name="asn"
                 class="oui-input"
-                data-ng-model="$ctrl.model.subnet"
-                data-placeholder="{{:: 'cloud_connect_datacenter_add_routing_neighbor_address_placeholder' | translate }}"
+                data-ng-model="$ctrl.subnet"
+                data-placeholder="{{:: 'cloud_connect_datacenter_add_routing_network_neighbor_placeholder' | translate }}"
                 required
             />
         </oui-field>

@@ -31,6 +31,7 @@ export default class CloudConnect {
 
   setPopConfiguration(configuration) {
     if (configuration.interfaceId) {
+      this.popType = configuration.type;
       this.popConfiguration[configuration.interfaceId] = new CloudConnectPop(
         configuration,
       );

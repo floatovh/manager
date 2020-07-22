@@ -1,19 +1,19 @@
 export default /* @ngInject */ ($stateProvider) => {
-  $stateProvider.state('cloud-connect.datacenter-add-routing', {
-    url: '/datacenter-add-routing',
-    views: {
-      modal: {
-        component: 'cloudConnectDatacenterAddRouting',
-      },
-    },
+  $stateProvider.state('cloud-connect.remove-datacenter-configuration', {
+    url: '/remove-datacenter-configuration',
     params: {
       datacenterId: null,
     },
+    views: {
+      modal: {
+        component: 'cloudConnectRemoveDatacenterConfiguration',
+      },
+    },
+    layout: 'modal',
     translations: {
       value: ['.'],
       format: 'json',
     },
-    layout: 'modal',
     resolve: {
       goBack: /* @ngInject */ (goToCloudConnectPage) => goToCloudConnectPage,
       datacenterId: /* @ngInject */ ($transition$) =>
