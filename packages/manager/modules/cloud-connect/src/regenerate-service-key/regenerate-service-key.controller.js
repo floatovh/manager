@@ -18,7 +18,11 @@ export default class RegenerateServiceKeyCtrl {
         this.cloudConnectId,
         this.serviceKeyId,
       )
-      .then(() => this.goBack(null, 'success', true))
+      .then(() => this.goBack(
+        this.$translate.instant('cloud_connect_service_key_regenerate_success'),
+        'success',
+        true,
+      ))
       .catch((error) =>
         this.goBack(
           this.$translate.instant('cloud_connect_service_key_regenerate_error', {

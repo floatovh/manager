@@ -19,7 +19,11 @@ export default class SendServiceKeyCtrl {
         this.serviceKeyId,
         this.email,
       )
-      .then(() => this.goBack(null, 'success', true))
+      .then(() => this.goBack(
+        this.$translate.instant('cloud_connect_service_key_send_success'),
+        'success',
+        true,
+      ))
       .catch((error) =>
         this.goBack(
           this.$translate.instant('cloud_connect_service_key_send_error', {

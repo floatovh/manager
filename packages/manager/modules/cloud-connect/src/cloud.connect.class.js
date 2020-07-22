@@ -112,4 +112,8 @@ export default class CloudConnect {
   isLoadingPop() {
     return this.isLoadingPopConfiguration() || this.isLoadingInterface();
   }
+
+  setVrackName(name) {
+    this.vrackName = name;
+  }
 }

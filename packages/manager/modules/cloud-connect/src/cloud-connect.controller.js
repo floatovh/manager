@@ -19,6 +19,7 @@ export default class CloudConnectCtrl {
     this.loadMessages();
     this.loadServiceInfo();
     if (this.cloudConnect.vrack) {
+      this.loadVrackDetails(this.cloudConnect.vrack);
       this.loadPopConfiguration();
       this.loadInterface();
       this.loadDatacenter();
@@ -37,6 +38,17 @@ export default class CloudConnectCtrl {
 
   refreshMessages() {
     this.messages = this.messageHandler.getMessages();
+  }
+
+  loadVrackDetails(vrackId) {
+    this.loadingVrack = true;
+    this.cloudConnectService
+      .getVrackDetails(vrackId)
+      .then((vrack) => this.cloudConnect.setVrackName(vrack.name))
+      .catch(() => this.cloudConnect.setVrackName(vrackId))
+      .finally(() => {
+        this.loadingVrack = false;
+      });
   }
 
   loadServiceInfo() {

@@ -11,9 +11,8 @@
         data-secondary-label="{{:: 'cloud_connect_close' | translate }}"
         data-on-dismiss="$ctrl.goBack()"
         data-loading="$ctrl.isLoading"
+        data-type="warning"
     >
-        <label for="serviceKey" data-translate="cloud_connect_service_key"></label>
-        <oui-clipboard id="serviceKey" data-model="$ctrl.serviceKey.key"></oui-clipboard>
         <p data-translate="cloud_connect_service_key_regenerate_confirm"></p>
     </oui-modal>
 </form>

@@ -95,8 +95,10 @@
                         <oui-tile-description
                             data-ng-if="$ctrl.cloudConnect.isVrackAssociated()"
                         >
+                            <oui-spinner data-size="s" data-ng-if="$ctrl.loadingVrack"></oui-spinner>
                             <span
-                                data-ng-bind="$ctrl.cloudConnect.vrack"
+                                data-ng-if="!$ctrl.loadingVrack"
+                                data-ng-bind="$ctrl.cloudConnect.vrackName"
                             ></span>
                         </oui-tile-description>
                         <oui-action-menu
