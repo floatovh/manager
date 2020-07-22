@@ -1,6 +1,10 @@
+import { LANGUAGES } from '../locale/locale.constants';
+import { saveUserLocale, findAvailableLocale } from '../locale';
+
 export default class EnvironmentService {
   constructor() {
     this.region = 'EU';
+    this.userLocale = LANGUAGES.defaultLoc;
     this.version = null;
   }
 
@@ -10,6 +14,16 @@ export default class EnvironmentService {
 
   getRegion() {
     return this.region;
+  }
+
+  setUserLocale(userLocale) {
+    const locale = findAvailableLocale(userLocale, this.getRegion());
+    saveUserLocale(locale);
+    this.userLocale = locale;
+  }
+
+  getUserLocale(min) {
+    return min ? this.userLocale.split('-')[0] : this.userLocale;
   }
 
   setVersion(version) {
