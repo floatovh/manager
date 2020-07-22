@@ -16,7 +16,7 @@ export default {
     goToUpdateDescriptionPage: '<',
     goToViewServiceKeyPage: '<',
     goToRegenerateServiceKeyPage: '<',
-    goToSSendServiceKeyPage: '<',
+    goToSendServiceKeyPage: '<',
     user: '<',
   },
   controller,

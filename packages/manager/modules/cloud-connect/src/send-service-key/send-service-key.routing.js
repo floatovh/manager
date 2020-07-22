@@ -15,7 +15,7 @@ export default /* @ngInject */ ($stateProvider) => {
       serviceKeyId: /* @ngInject */ ($transition$) =>
         $transition$.params().serviceKeyId,
       serviceKey: /* @ngInject */ (cloudConnect) =>
-        cloudConnect.getServiceKey(),
+        cloudConnect.getActiveServiceKey(),
       goBack: /* @ngInject */ (goToCloudConnectPage) => goToCloudConnectPage,
     },
   });

@@ -13,15 +13,15 @@ export default /* @ngInject */ ($stateProvider) => {
     },
     params: {
       interfaceId: null,
-      isProviderService: false,
+      isDirectProduct: false,
     },
     resolve: {
       interfaceId: /* @ngInject */ ($transition$) =>
         $transition$.params().interfaceId,
-      isProviderService: /* @ngInject */ ($transition$) =>
-        $transition$.params().isProviderService,
-      popTypes: /* @ngInject */ (cloudConnectService, isProviderService) =>
-        cloudConnectService.getSupportedPopTypes(isProviderService),
+      isDirectProduct: /* @ngInject */ ($transition$) =>
+        $transition$.params().isDirectProduct,
+      popTypes: /* @ngInject */ (cloudConnectService, isDirectProduct) =>
+        cloudConnectService.getSupportedPopTypes(isDirectProduct),
       goBack: /* @ngInject */ (goToCloudConnectPage) => goToCloudConnectPage,
     },
   });

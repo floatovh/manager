@@ -76,8 +76,8 @@ export default class CloudConnectService {
     return this.POP_TYPES;
   }
 
-  getSupportedPopTypes(isProviderService) {
-    if (isProviderService) {
+  getSupportedPopTypes(isDirectProduct) {
+    if (isDirectProduct) {
       return filter(this.getAllPopTypes(), (type) => type.id !== 'l2');
     }
     return this.getAllPopTypes();
@@ -210,7 +210,7 @@ export default class CloudConnectService {
       .then(() => this.clearCache(this.cache.interface));
   }
 
-  getServiceKey(serviceName) {
+  getActiveServiceKey(serviceName) {
     return this.$http.get(`/ovhCloudConnect/${serviceName}/serviceKey`, {
       cache: this.cache.serviceKey,
     });

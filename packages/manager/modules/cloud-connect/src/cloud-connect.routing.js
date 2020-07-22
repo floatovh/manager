@@ -23,7 +23,7 @@ export default /* @ngInject */ ($stateProvider) => {
       ) =>
         $state.go('cloud-connect.add-pop', {
           interfaceId,
-          isProviderService: cloudConnect.isProviderService(),
+          isDirectProduct: cloudConnect.isDirectProduct(),
         }),
       goToRemovePopConfigurationPage: /* @ngInject */ (
         $state,
@@ -38,11 +38,11 @@ export default /* @ngInject */ ($stateProvider) => {
       goToUnlockPortPage: /* @ngInject */ ($state) => (interfaceId) =>
         $state.go('cloud-connect.unlock-port', { interfaceId }),
       goToViewServiceKeyPage: /* @ngInject */ ($state, cloudConnect) => () =>
-        $state.go('cloud-connect.view-service-key', { serviceKeyId: cloudConnect.getServiceKey().id }),
+        $state.go('cloud-connect.view-service-key', { serviceKeyId: cloudConnect.getActiveServiceKey().id }),
       goToRegenerateServiceKeyPage: /* @ngInject */ ($state, cloudConnect) => () =>
-        $state.go('cloud-connect.regenerate-service-key', { serviceKeyId: cloudConnect.getServiceKey().id }),
-      goToSSendServiceKeyPage: /* @ngInject */ ($state, cloudConnect) => () =>
-        $state.go('cloud-connect.send-service-key', { serviceKeyId: cloudConnect.getServiceKey().id }),
+        $state.go('cloud-connect.regenerate-service-key', { serviceKeyId: cloudConnect.getActiveServiceKey().id }),
+      goToSendServiceKeyPage: /* @ngInject */ ($state, cloudConnect) => () =>
+        $state.go('cloud-connect.send-service-key', { serviceKeyId: cloudConnect.getActiveServiceKey().id }),
       goToDatacenterAdd: /* @ngInject */ ($state) => () =>
         $state.go('cloud-connect.datacenter-add'),
       goToDatacenterAddRouting: /* @ngInject */ ($state) => () =>

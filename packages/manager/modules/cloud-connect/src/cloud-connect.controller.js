@@ -24,7 +24,7 @@ export default class CloudConnectCtrl {
       this.loadInterface();
       this.loadDatacenter();
     }
-    if (this.cloudConnect.isProviderService()) {
+    if (this.cloudConnect.isDirectProduct()) {
       this.loadServiceKeys();
     }
   }
