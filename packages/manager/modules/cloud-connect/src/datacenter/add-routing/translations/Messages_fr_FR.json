@@ -1,0 +1,9 @@
+{
+  "cloud_connect_datacenter_add_routing_title": "Ajouter une configuration de routage",
+  "cloud_connect_datacenter_add_routing_description": "Vous pouvez ajouter un centre de données ici routage",
+  "cloud_connect_datacenter_add_routing_select_title": "Sélectionnez un type",
+  "cloud_connect_datacenter_add_routing_select_placeholder": "Sélectionnez",
+  "cloud_connect_datacenter_add_routing_select_asn": "Saisissez l'ASN OVH",
+  "cloud_connect_datacenter_add_routing_network_neighbor": "Saisissez l'adresse IP Neighbor",
+  "cloud_connect_datacenter_add_routing_network_neighbor_placeholder": "IP Neighbor"
+}

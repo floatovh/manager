@@ -32,6 +32,7 @@
   "cloud_connect_common_cancel": "Annuler",
   "cloud_connect_common_confirm": "Confirmer",
   "cloud_connect_common_create": "Créer",
+  "cloud_connect_status_init": "Init",
   "cloud_connect_common_m": "Mo",
   "cloud_connect_common_g": "Go",
   "cloud_connect_type": "Type",
@@ -83,5 +84,7 @@
   "cloud_connect_service_key_send_error": "Échec de l'envoi d'une clé de service: {{message}}",
   "cloud_connect_service_email": "Email",
   "cloud_connect_email_placeholder": "Entrer l'adresse e-mail",
-  "cloud_connect_loa_download_error": ""
+  "cloud_connect_loa_download_error": "Échec du téléchargement de la LOA: {{message}}",
+  "cloud_connect_datacenter_add_configuration": "Ajouter une configuration",
+  "cloud_connect_datacenter_add_routage_configuration": "Ajouter configuration de routage"
 }

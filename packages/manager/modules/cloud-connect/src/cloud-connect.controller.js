@@ -1,5 +1,5 @@
 import moment from 'moment';
-import get from 'lodash/get';
+import { get, map } from 'lodash';
 
 import { GUIDELINK, POP_MAP } from './cloud-connect.constants';
 
@@ -21,8 +21,9 @@ export default class CloudConnectCtrl {
     if (this.cloudConnect.vrack) {
       this.loadPopConfiguration();
       this.loadInterface();
+      this.loadDatacenter();
     }
-    if(this.cloudConnect.isProviderService()) {
+    if (this.cloudConnect.isProviderService()) {
       this.loadServiceKeys();
     }
   }
@@ -53,6 +54,7 @@ export default class CloudConnectCtrl {
   loadPopConfiguration() {
     this.cloudConnectService
       .loadPopConfiguration(this.cloudConnect)
+      .then(() => this.loadDatacenterConfiguration())
       .catch((error) =>
         this.CucCloudMessage.error(
           this.$translate.instant('cloud_connect_pop_get_configuration_error', {
@@ -63,8 +65,32 @@ export default class CloudConnectCtrl {
   }
 
   loadInterface() {
-    this.cloudConnectService
-      .loadInterface(this.cloudConnect)
+    this.cloudConnectService.loadInterface(this.cloudConnect).catch((error) =>
+      this.CucCloudMessage.error(
+        this.$translate.instant('cloud_connect_pop_get_configuration_error', {
+          message: get(error, 'data.message', error.message),
+        }),
+      ),
+    );
+  }
+
+  loadServiceKeys() {
+    this.cloudConnectService.loadServiceKeys(this.cloudConnect).catch((error) =>
+      this.CucCloudMessage.error(
+        this.$translate.instant('cloud_connect_service_key_get_error', {
+          message: get(error, 'data.message', error.message),
+        }),
+      ),
+    );
+  }
+
+  loadDatacenter() {
+    return this.cloudConnectService
+      .getDatacenterList(this.cloudConnect)
+      .then((res) => {
+        this.datacenters = res;
+        return res;
+      })
       .catch((error) =>
         this.CucCloudMessage.error(
           this.$translate.instant('cloud_connect_pop_get_configuration_error', {
@@ -74,16 +100,13 @@ export default class CloudConnectCtrl {
       );
   }
 
-  loadServiceKeys() {
-    this.cloudConnectService
-      .loadServiceKeys(this.cloudConnect)
-      .catch((error) =>
-        this.CucCloudMessage.error(
-          this.$translate.instant('cloud_connect_service_key_get_error', {
-            message: get(error, 'data.message', error.message),
-          }),
-        ),
+  loadDatacenterConfiguration() {
+    map(this.cloudConnect.popIds, (id) => {
+      this.cloudConnectService.getDatacenterConfigurationList(
+        this.cloudConnect,
+        id,
       );
+    });
   }
 
   getBandwidth(bandwidth) {
@@ -94,8 +117,7 @@ export default class CloudConnectCtrl {
   }
 
   getPopTypeName(typeId) {
-    return this.cloudConnectService
-      .getPopTypeName(typeId);
+    return this.cloudConnectService.getPopTypeName(typeId);
   }
 
   downloadLOA() {
