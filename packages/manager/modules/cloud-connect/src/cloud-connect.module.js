@@ -5,11 +5,14 @@ import associateVrack from './associate-vrack';
 import component from './cloud-connect.component';
 import editDescription from './edit-description';
 import lockPort from './lock-port';
+import regenerateServiceKey from './regenerate-service-key';
 import removePopConfiguration from './remove-pop-configuration';
 import removeVrack from './remove-vrack';
 import routing from './cloud-connect.routing';
+import sendServiceKey from './send-service-key';
 import service from './cloud-connect.service';
 import unlockPort from './unlock-port';
+import viewServiceKey from './view-service-key';
 
 import datacenterAdd from './datacenter/add';
 
@@ -21,10 +24,13 @@ angular
     associateVrack,
     editDescription,
     lockPort,
+    regenerateServiceKey,
     removePopConfiguration,
     datacenterAdd,
     removeVrack,
     unlockPort,
+    viewServiceKey,
+    sendServiceKey,
   ])
   .config(routing)
   .component('cloudConnect', component)

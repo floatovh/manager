@@ -231,11 +231,19 @@ export default class CloudConnectService {
   }
 
   regenerateServiceKey(serviceName, serviceKeyId) {
-    return this.$http.post(`/ovhCloudConnect/${serviceName}/serviceKey/${serviceKeyId}/regenerate`);
+    return this.$http.post(`/ovhCloudConnect/${serviceName}/serviceKey/${serviceKeyId}/regenerate`)
+    .then(() => this.clearCache(this.cache.serviceKeys));
   }
 
-  sendServiceKey(serviceName, serviceKeyId) {
-    return this.$http.post(`/ovhCloudConnect/${serviceName}/serviceKey/${serviceKeyId}/send`);
+  sendServiceKey(serviceName, serviceKeyId, email) {
+    return this.$http.post(`/ovhCloudConnect/${serviceName}/serviceKey/${serviceKeyId}/send`, {
+      email,
+    });
+  }
+
+  downloadLOA(serviceName) {
+    return this.$http.post(`/ovhCloudConnect/${serviceName}/loa`)
+    .then(res => res.data);
   }
 
   createDatacenter(serviceName, popId, data) {

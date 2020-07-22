@@ -30,13 +30,20 @@
                             class="flex-grow-1 oui-heading_4 oui-tile__title"
                             data-translate="cloud_connect_informations"
                         ></h4>
+                        <oui-spinner
+                            class="ml-auto"
+                            data-ng-if="$ctrl.downloadingLoa"
+                            data-size="s">
+                        </oui-spinner>
                         <oui-action-menu
                             data-compact
                             data-align="end"
                             class="ml-auto"
+                            data-ng-if="$ctrl.cloudConnect.isProviderService() && !$ctrl.downloadingLoa"
                         >
                             <oui-action-menu-item
                                 data-text="{{ ::'cloud_connect_ola_download' | translate }}"
+                                data-on-click="$ctrl.downloadLOA()"
                             ></oui-action-menu-item>
                         </oui-action-menu>
                     </div>
@@ -138,17 +145,17 @@
                         data-ng-if="$ctrl.cloudConnect.isProviderService()"
                         data-term="{{ ::'cloud_connect_provider' | translate }}"
                         data-description="{{ ::$ctrl.cloudConnect.provider }}">
-                        <oui-action-menu data-compact data-align="end">
+                        <oui-action-menu data-compact data-align="end" data-disabled="$ctrl.cloudConnect.isLoadingServiceKeys()">
                             <oui-action-menu-item
-                                data-on-click="$ctrl.goToSendServiceKey($ctrl.cloudConnect.provider)"
+                                data-on-click="$ctrl.goToSSendServiceKeyPage()"
                                 data-text="{{ ::'cloud_connect_provider_send_service_key' | translate }}"
                             ></oui-action-menu-item>
                             <oui-action-menu-item
-                                data-on-click="$ctrl.goToGenerateServiceKey($ctrl.cloudConnect.provider)"
-                                data-text="{{ ::'cloud_connect_provider_generate_service_key' | translate }}"
+                                data-on-click="$ctrl.goToRegenerateServiceKeyPage()"
+                                data-text="{{ ::'cloud_connect_provider_regenerate_service_key' | translate }}"
                             ></oui-action-menu-item>
                             <oui-action-menu-item
-                                data-on-click="$ctrl.goToShowServiceKey($ctrl.cloudConnect.provider)"
+                                data-on-click="$ctrl.goToViewServiceKeyPage()"
                                 data-text="{{ ::'cloud_connect_provider_show_service_key' | translate }}"
                             ></oui-action-menu-item>
                         </oui-action-menu>

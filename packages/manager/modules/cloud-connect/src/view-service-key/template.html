@@ -1,0 +1,14 @@
+<form
+    id="viewServiceKey"
+    name="viewServiceKey"
+    novalidate>
+    <oui-modal
+        data-heading="{{ 'cloud_connect_service_key' | translate }}"
+        data-secondary-action="$ctrl.goBack()"
+        data-secondary-label="{{:: 'cloud_connect_close' | translate }}"
+        data-on-dismiss="$ctrl.goBack()"
+    >
+        <label for="serviceKey" data-translate="cloud_connect_service_key"></label>
+        <oui-clipboard id="serviceKey" data-model="$ctrl.serviceKey.key"></oui-clipboard>
+    </oui-modal>
+</form>

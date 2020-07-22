@@ -49,12 +49,20 @@ export default class CloudConnect {
     this.loadingServiceKeys = loading;
   }
 
+  isLoadingServiceKeys() {
+    return this.loadingServiceKeys;
+  }
+
   setServiceKeys(serviceKeys) {
     this.serviceKeys = serviceKeys;
   }
 
   getServiceKeys() {
     return this.serviceKeys;
+  }
+
+  getServiceKey() {
+    return !isEmpty(this.serviceKeys) ? this.serviceKeys[0] : null;
   }
 
   isLoadingPopConfiguration() {

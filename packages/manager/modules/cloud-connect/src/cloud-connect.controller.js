@@ -5,8 +5,9 @@ import { GUIDELINK, POP_MAP } from './cloud-connect.constants';
 
 export default class CloudConnectCtrl {
   /* @ngInject */
-  constructor($translate, CucCloudMessage, cloudConnectService) {
+  constructor($translate, $window, CucCloudMessage, cloudConnectService) {
     this.$translate = $translate;
+    this.$window = $window;
     this.CucCloudMessage = CucCloudMessage;
     this.cloudConnectService = cloudConnectService;
     this.$translate = $translate;
@@ -95,5 +96,22 @@ export default class CloudConnectCtrl {
   getPopTypeName(typeId) {
     return this.cloudConnectService
       .getPopTypeName(typeId);
+  }
+
+  downloadLOA() {
+    this.downloadingLoa = true;
+    this.cloudConnectService
+      .downloadLOA(this.cloudConnectId)
+      .then(url => this.$window.open(url, '_blank', 'noopener'))
+      .catch((error) =>
+        this.CucCloudMessage.error(
+          this.$translate.instant('cloud_connect_loa_download_error', {
+            message: get(error, 'data.message', error.message),
+          }),
+        ),
+      )
+      .finally(() => {
+        this.downloadingLoa = false;
+      });
   }
 }
