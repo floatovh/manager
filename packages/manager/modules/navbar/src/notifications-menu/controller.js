@@ -13,14 +13,12 @@ export default class NotificationsCtrl {
     NavbarNotifications,
     ovhManagerNavbarMenuHeaderBuilder,
     ouiNavbarConfiguration,
-    TranslateService,
   ) {
     this.$q = $q;
     this.$translate = $translate;
     this.atInternet = atInternet;
     this.NavbarBuilder = ovhManagerNavbarMenuHeaderBuilder;
     this.NavbarNotifications = NavbarNotifications;
-    this.TranslateService = TranslateService;
     this.translations = ouiNavbarConfiguration.translations;
 
     this.REGION = Environment.getRegion();
@@ -76,7 +74,7 @@ export default class NotificationsCtrl {
 
   getSublinks() {
     return this.NavbarNotifications.getNotifications(
-      this.TranslateService.getUserLocale(),
+      Environment.getUserLocale(),
       this.REGION,
     )
       .then((notifications) =>
