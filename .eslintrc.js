@@ -24,15 +24,4 @@ module.exports = {
     'import/no-unresolved': 0,
     'prettier/prettier': 'error',
   },
-  settings: {
-    'import/resolver': {
-      'eslint-import-resolver-lerna': {
-        packages: [
-          path.resolve(__dirname, 'packages/manager/apps'),
-          path.resolve(__dirname, 'packages/manager/modules'),
-          path.resolve(__dirname, 'packages/manager/tools'),
-        ],
-      },
-    },
-  },
 };
