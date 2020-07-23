@@ -1,3 +1,4 @@
+import controller from './service-keys.controller';
 import template from './template.html';
 
 export default {
@@ -5,5 +6,6 @@ export default {
     cloudConnect: '<',
     cloudConnectId: '<',
   },
+  controller,
   template,
 };

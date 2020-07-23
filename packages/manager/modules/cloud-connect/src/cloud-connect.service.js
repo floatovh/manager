@@ -1,6 +1,6 @@
 import { find, filter, forOwn, map } from 'lodash';
 
-import CloudConnect from './cloud.connect.class';
+import CloudConnect from './cloud-connect.class';
 
 import { POP_TYPES } from './cloud-connect.constants';
 
