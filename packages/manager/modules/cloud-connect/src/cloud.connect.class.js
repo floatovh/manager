@@ -1,5 +1,7 @@
+import head from 'lodash/head';
 import isEmpty from 'lodash/isEmpty';
 import find from 'lodash/find';
+import values from 'lodash/values';
 
 import CloudConnectPop from './cloud-connect-pop.class';
 import CloudConnectInterface from './cloud-connect-interface.class';
@@ -16,7 +18,7 @@ export default class CloudConnect {
     this.interfaces = {};
   }
 
-  isDirectProduct() {
+  isDirectService() {
     return this.provider === 'OVHcloud';
   }
 
@@ -28,6 +30,19 @@ export default class CloudConnect {
     return (
       !isEmpty(this.popConfiguration) && this.popConfiguration[interfaceId]
     );
+  }
+
+  isPopConfigurationExists() {
+    return !isEmpty(this.popConfiguration);
+  }
+
+  getAllowedPopType() {
+    if (this.isPopConfigurationExists()) {
+      return head(values(this.popConfiguration));
+    }
+    else {
+      return null;
+    }
   }
 
   setPopConfiguration(configuration) {
@@ -70,7 +85,8 @@ export default class CloudConnect {
   }
 
   getActiveServiceKey() {
-    return find(this.getServiceKeys(), { status: 'active' });
+    return find(this.getServiceKeys(), key =>
+      key.status === 'active' || key.status === 'doing');
   }
 
   isLoadingPopConfiguration() {

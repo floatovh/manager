@@ -23,12 +23,16 @@
                 data-match="name"
                 data-placeholder="{{ ::'cloud_connect_pop_configure_pop_select_type' | translate }}"
                 data-required
+                disabled="$ctrl.popTypeSelected"
             >
                 <span data-ng-bind="$item.name"></span>
             </oui-select>
         </oui-field>
         <div data-ng-if="$ctrl.popType && $ctrl.popType.id === 'l3'">
-            <oui-field data-label="{{ ::'cloud_connect_asn_type' | translate }}">
+            <oui-field
+                data-label="{{ ::'cloud_connect_asn_type' | translate }}"
+                help-text="Positive non zero number excluding 65501"
+                label-popover="We encourage you to pick an ASN between 64,512 to 65,534 excluding 65,501.">
                 <input
                     class="oui-input"
                     type="number"
@@ -36,10 +40,14 @@
                     name="asn-type"
                     data-ng-model="$ctrl.pop.customerBgpArea"
                     required
+                    min="1"
                     placeholder="{{ ::'cloud_connect_asn_type_placeholder' | translate }}"
                 >
             </oui-field>
-            <oui-field data-label="{{ ::'cloud_connect_asn_ovh_cloud' | translate }}">
+            <oui-field
+                data-label="{{ ::'cloud_connect_asn_ovh_cloud' | translate }}"
+                help-text="Positive non zero number excluding 65501"
+                label-popover="We encourage you to pick an ASN between 64,512 to 65,534 excluding 65,501.">
                 <input
                     class="oui-input"
                     type="number"
@@ -47,6 +55,7 @@
                     name="asn-ovhcloud"
                     data-ng-model="$ctrl.pop.ovhBgpArea"
                     required
+                    min="1"
                     placeholder="{{ ::'cloud_connect_asn_ovh_cloud_placeholder' | translate }}"
                 >
             </oui-field>

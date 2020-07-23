@@ -28,6 +28,7 @@ export default class CloudConnectService {
       datacenterConfiguration: this.$cacheFactory(
         'CLOUD_CONNECT_DATACENTER_CONFIGURATION',
       ),
+      tasks: this.$cacheFactory('CLOUD_CONNECT_tasks'),
     };
   }
 
@@ -79,12 +80,12 @@ export default class CloudConnectService {
     return this.POP_TYPES;
   }
 
-  getSupportedPopTypes(isDirectProduct) {
-    if (isDirectProduct) {
-      return filter(this.getAllPopTypes(), (type) => type.id !== 'l2');
-    }
-    return this.getAllPopTypes();
-  }
+  // getSupportedPopTypes(isDirectService) {
+  //   if (isDirectService) {
+  //     return filter(this.getAllPopTypes(), (type) => type.id !== 'l2');
+  //   }
+  //   return this.getAllPopTypes();
+  // }
 
   getPopTypeName(typeId) {
     const type = find(this.getAllPopTypes(), (pop) => pop.id === typeId);
@@ -149,6 +150,14 @@ export default class CloudConnectService {
       });
   }
 
+  loadAllTasks(serviceName) {
+    return this.$http.get(
+      `/ovhCloudConnect/${serviceName}/task`, {
+        cache: this.cache.tasks,
+      }
+    ).then(tasks => tasks.data);
+  }
+
   addPopConfiguration(ovhCloudConnectId, interfaceId, type, pop) {
     let options = {
       type,
@@ -162,7 +171,7 @@ export default class CloudConnectService {
     }
     return this.$http
       .post(`/ovhCloudConnect/${ovhCloudConnectId}/config/pop`, options)
-      .then((task) => this.checkTaskStatus(ovhCloudConnectId, task.data.id))
+      // .then((task) => this.checkTaskStatus(ovhCloudConnectId, task.data.id))
       .then((res) => {
         this.clearCache(this.cache.popConfigurationList);
         this.clearCache(this.cache.popConfiguration);
@@ -173,7 +182,7 @@ export default class CloudConnectService {
   removePopConfiguration(ovhCloudConnectId, popId) {
     return this.$http
       .delete(`/ovhCloudConnect/${ovhCloudConnectId}/config/pop/${popId}`)
-      .then((task) => this.checkTaskStatus(ovhCloudConnectId, task.data.id))
+      // .then((task) => this.checkTaskStatus(ovhCloudConnectId, task.data.id))
       .then((res) => {
         this.clearCache(this.cache.popConfigurationList);
         this.clearCache(this.cache.popConfiguration);
@@ -202,15 +211,22 @@ export default class CloudConnectService {
   lockInterface(serviceName, interfaceId) {
     return this.$http
       .post(`/ovhCloudConnect/${serviceName}/interface/${interfaceId}/lock`)
-      .then((task) => this.checkTaskStatus(serviceName, task.data.id))
-      .then(() => this.clearCache(this.cache.interface));
+      // .then((task) => this.checkTaskStatus(serviceName, task.data.id))
+      .then(task => {
+        this.clearCache(this.cache.interface);
+        return task.data;
+      });
   }
 
   unlockInterface(serviceName, interfaceId) {
     return this.$http
       .post(`/ovhCloudConnect/${serviceName}/interface/${interfaceId}/unlock`)
-      .then((task) => this.checkTaskStatus(serviceName, task.data.id))
-      .then(() => this.clearCache(this.cache.interface));
+      // .then((task) => this.checkTaskStatus(serviceName, task.data.id))
+      // .then(() => this.clearCache(this.cache.interface));
+      .then(task => {
+        this.clearCache(this.cache.interface);
+        return task.data;
+      });
   }
 
   getActiveServiceKey(serviceName) {

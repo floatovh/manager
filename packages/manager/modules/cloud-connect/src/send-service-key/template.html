@@ -4,7 +4,7 @@
     data-ng-submit="sendServiceKey.$valid && $ctrl.sendServiceKey()"
     novalidate>
     <oui-modal
-        data-heading="{{ 'cloud_connect_provider_send_service_key' | translate }}"
+        data-heading="{{ 'cloud_connect_service_key_active_send' | translate }}"
         data-primary-label="{{:: 'cloud_connect_send' | translate }}"
         data-primary-disabled="$ctrl.isLoading"
         data-secondary-action="$ctrl.goBack()"
@@ -12,9 +12,6 @@
         data-on-dismiss="$ctrl.goBack()"
         data-loading="$ctrl.isLoading"
     >
-        <oui-field data-label="{{ ::'cloud_connect_service_key' | translate }}">
-            <oui-clipboard id="serviceKey" data-model="$ctrl.serviceKey.key"></oui-clipboard>
-        </oui-field>
         <oui-field data-label="{{ ::'cloud_connect_service_email' | translate }}">
             <input
                 class="oui-input"

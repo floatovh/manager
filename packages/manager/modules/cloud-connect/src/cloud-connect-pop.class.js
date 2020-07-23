@@ -3,6 +3,10 @@ export default class CloudConnectPop {
     Object.assign(this, cloudConnectPop);
   }
 
+  isL3Type() {
+    return this.type === 'l3';
+  }
+
   isActive() {
     return this.status === 'active';
   }

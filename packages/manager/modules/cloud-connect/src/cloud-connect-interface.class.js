@@ -1,4 +1,5 @@
 import moment from 'moment';
+import find from 'lodash/find';
 
 export default class CloudConnectInterface {
   constructor(cloudConnectInterface) {
@@ -14,11 +15,11 @@ export default class CloudConnectInterface {
   }
 
   disable() {
-    return this.status === 'disabled';
+    this.status === 'disabled';
   }
 
   enable() {
-    return this.status === 'enabled';
+    this.status === 'enabled';
   }
 
   isOutgoingLightStatusUp() {
@@ -43,5 +44,11 @@ export default class CloudConnectInterface {
 
   isIncomingLightStatusUnknown() {
     return !this.isIncomingLightStatusUp() && !this.isIncomingLightStatusDown();
+  }
+
+  isTaskPending(tasks) {
+    return find(tasks, task => {
+      return task.resourceId === this.id && (task.status === 'todo' || task.status === 'doing');
+    });
   }
 }

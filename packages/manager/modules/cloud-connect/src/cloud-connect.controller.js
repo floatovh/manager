@@ -16,15 +16,22 @@ export default class CloudConnectCtrl {
   }
 
   $onInit() {
+    // this.data = {
+    //   tasks: [],
+    // };
+    // this.loaders = {
+    //   loadingTasks: false,
+    // };
     this.loadMessages();
     this.loadServiceInfo();
     if (this.cloudConnect.vrack) {
       this.loadVrackDetails(this.cloudConnect.vrack);
       this.loadPopConfiguration();
       this.loadInterface();
+      // this.loadAllTasks();
       this.loadDatacenter();
     }
-    if (this.cloudConnect.isDirectProduct()) {
+    if (!this.cloudConnect.isDirectService()) {
       this.loadServiceKeys();
     }
   }
@@ -95,6 +102,15 @@ export default class CloudConnectCtrl {
       ),
     );
   }
+
+  // loadAllTasks() {
+  //   this.loaders.loadingTasks = true;
+  //   this.cloudConnectService.loadAllTasks(this.cloudConnect)
+  //   .then(tasks => this.data.tasks = tasks)
+  //   .finally(() => {
+  //     this.loaders.loadingTasks = false;
+  //   });
+  // }
 
   loadDatacenter() {
     return this.cloudConnectService

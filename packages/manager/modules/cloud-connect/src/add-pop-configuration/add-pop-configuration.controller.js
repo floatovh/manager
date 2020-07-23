@@ -1,3 +1,4 @@
+import find from 'lodash/find';
 import get from 'lodash/get';
 
 export default class AddPopConfigurationCtrl {
@@ -10,6 +11,11 @@ export default class AddPopConfigurationCtrl {
   $onInit() {
     this.isLoading = false;
     this.pop = {};
+    this.popType = null;
+    if (this.allowedPopType) {
+      this.popType = find(this.popTypes, { id: this.allowedPopType.type });
+      this.popTypeSelected = this.popType ? true : false;
+    }
   }
 
   configurePop() {
@@ -21,7 +27,11 @@ export default class AddPopConfigurationCtrl {
         this.popType.id,
         this.pop,
       )
-      .then(() => this.goBack(null, 'success', true))
+      .then(() => this.goBack(
+        this.$translate.instant('cloud_connect_pop_add_configuration_success'),
+        'success',
+        true,
+      ))
       .catch((error) =>
         this.goBack(
           this.$translate.instant('cloud_connect_pop_add_configuration_error', {

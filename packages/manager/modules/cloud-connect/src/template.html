@@ -40,7 +40,7 @@
                             data-compact
                             data-align="end"
                             class="ml-auto"
-                            data-ng-if="$ctrl.cloudConnect.isDirectProduct() && !$ctrl.downloadingLoa"
+                            data-ng-if="$ctrl.cloudConnect.isDirectService() && !$ctrl.downloadingLoa"
                         >
                             <oui-action-menu-item
                                 data-text="{{ ::'cloud_connect_ola_download' | translate }}"
@@ -148,9 +148,10 @@
                     </oui-tile-definition>
                     <!-- provider -->
                     <oui-tile-definition
+                        data-ng-if="!$ctrl.cloudConnect.isDirectService()"
                         data-term="{{ ::'cloud_connect_provider' | translate }}"
                         data-description="{{ ::$ctrl.cloudConnect.provider }}">
-                        <oui-action-menu
+                        <!-- <oui-action-menu
                             data-compact
                             data-align="end"
                             data-ng-if="!$ctrl.cloudConnect.isLoadingServiceKeys() && $ctrl.cloudConnect.getActiveServiceKey()">
@@ -165,6 +166,37 @@
                             <oui-action-menu-item
                                 data-on-click="$ctrl.goToViewServiceKeyPage()"
                                 data-text="{{ ::'cloud_connect_provider_show_service_key' | translate }}"
+                            ></oui-action-menu-item>
+                        </oui-action-menu> -->
+                    </oui-tile-definition>
+                    <!-- service keys -->
+                    <oui-tile-definition
+                        data-ng-if="!$ctrl.cloudConnect.isDirectService()"
+                        data-term="{{ ::'cloud_connect_service_key_active' | translate }}">
+                        <oui-tile-description data-ng-if="$ctrl.cloudConnect.isLoadingServiceKeys()">
+                            <oui-spinner data-size="s"></oui-spinner>
+                        </oui-tile-description>
+                        <oui-tile-description
+                            data-ng-if="!$ctrl.cloudConnect.isLoadingServiceKeys()"
+                            data-ng-init="activeKey = $ctrl.cloudConnect.getActiveServiceKey()">
+                            <oui-clipboard
+                                data-ng-if="activeKey"
+                                data-model="activeKey.key">
+                            </oui-clipboard>
+                            <span data-ng-if="!activeKey" data-translate="cloud_connect_service_key_active_not_found"></span>
+                        </oui-tile-description>
+                        <oui-action-menu
+                            data-ng-if="!$ctrl.cloudConnect.isLoadingServiceKeys()"
+                            data-compact
+                            data-align="end"
+                            data-ng-init="activeKey = $ctrl.cloudConnect.getActiveServiceKey()">
+                            <oui-action-menu-item
+                                data-ng-disabled="!activeKey"
+                                data-on-click="$ctrl.goToSendServiceKeyPage()"
+                                data-text="{{ ::'cloud_connect_service_key_active_send' | translate }}"
+                            ></oui-action-menu-item>
+                            <oui-action-menu-item
+                                data-text="{{ ::'cloud_connect_service_keys_manage' | translate }}"
                             ></oui-action-menu-item>
                         </oui-action-menu>
                     </oui-tile-definition>
@@ -243,15 +275,16 @@
                         </oui-tile-definition>
                         <!-- port lock/unlock -->
                         <oui-tile-definition
+                            data-ng-if="$ctrl.cloudConnect.isDirectService()"
                             data-term="{{ ::'cloud_connect_pop_port_lock' | translate }}"
                         >
                             <oui-tile-description>
                                 <span class="d-inline-block align-bottom">
-                                    <span
+                                    <!-- <span
                                         class="pr-2"
                                         data-ng-bind="$interface.localeLightLastUpdate"
-                                    ></span>
-                                    <span data-ng-if="$ctrl.cloudConnect.isDirectProduct()">
+                                    ></span> -->
+                                    <span>
                                         <i
                                             data-ng-if="$interface.isEnabled()"
                                             class="oui-icon oui-icon-padlock-opened_concept oui-color-primary"
@@ -271,7 +304,6 @@
                                 data-compact
                                 data-align="end"
                                 class="ml-auto"
-                                data-ng-if="$ctrl.cloudConnect.isDirectProduct()"
                             >
                                 <oui-action-menu-item
                                     data-ng-if="$interface.isEnabled()"
@@ -289,27 +321,28 @@
                         </oui-tile-definition>
                         <!-- ASN client -->
                         <oui-tile-definition
-                            data-ng-if="$ctrl.cloudConnect.isDirectProduct()"
+                            data-ng-if="$pop.isL3Type()"
                             data-term="{{ ::'cloud_connect_asn_type' | translate }}"
                             data-description="{{ ::$pop.customerBgpArea }}"
                         >
                         </oui-tile-definition>
                         <!-- ASN OVHcloud -->
                         <oui-tile-definition
-                            data-ng-if="$ctrl.cloudConnect.isDirectProduct()"
+                            data-ng-if="$pop.isL3Type()"
                             data-term="{{ ::'cloud_connect_asn_ovh_cloud' | translate }}"
                             data-description="{{ ::$pop.ovhBgpArea }}"
                         >
                         </oui-tile-definition>
                         <!-- network address -->
                         <oui-tile-definition
-                            data-ng-if="$ctrl.cloudConnect.isDirectProduct()"
+                            data-ng-if="$pop.isL3Type()"
                             data-term="{{ ::'cloud_connect_network' | translate }}"
                             data-description="{{ ::$pop.subnet }}"
                         >
                         </oui-tile-definition>
                         <!-- optique status -->
                         <oui-tile-definition
+                            data-ng-if="$ctrl.cloudConnect.isDirectService()"
                             data-term="{{ ::'cloud_connect_pop_interface_status' | translate }}"
                         >
                             <oui-tile-description>

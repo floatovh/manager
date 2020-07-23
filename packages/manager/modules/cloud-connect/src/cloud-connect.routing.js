@@ -23,7 +23,8 @@ export default /* @ngInject */ ($stateProvider) => {
       ) =>
         $state.go('cloud-connect.add-pop', {
           interfaceId,
-          isDirectProduct: cloudConnect.isDirectProduct(),
+          isDirectService: cloudConnect.isDirectService(),
+          allowedPopType: cloudConnect.getAllowedPopType(),
         }),
       goToRemovePopConfigurationPage: /* @ngInject */ (
         $state,

@@ -19,7 +19,11 @@ export default class RemovePopConfigurationCtrl {
         this.popId,
         this.interfaceId,
       )
-      .then(() => this.goBack(null, 'success', true))
+      .then(() => this.goBack(
+        this.$translate.instant('cloud_connect_pop_remove_configuration_success'),
+        'success',
+        true,
+      ))
       .catch((error) =>
         this.goBack(
           this.$translate.instant('cloud_connect_pop_remove_configuration_error', {

@@ -7,6 +7,7 @@ export default {
     goBack: '<',
     interfaceId: '<',
     popTypes: '<',
+    allowedPopType: '<',
   },
   controller,
   template,
