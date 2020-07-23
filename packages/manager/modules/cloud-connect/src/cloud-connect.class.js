@@ -5,11 +5,13 @@ import values from 'lodash/values';
 
 import CloudConnectPop from './cloud-connect-pop.class';
 import CloudConnectInterface from './cloud-connect-interface.class';
+import CloudConnectDatacenter from './cloud-connect-datacenter.class';
 
 export default class CloudConnect {
   constructor(cloudConnect) {
     Object.assign(this, cloudConnect);
-    this.datacenterConfigurations = [];
+    this.datacenterConfigurations = {};
+    this.datacenterConfigurationIds = [];
     this.loadingPopConfiguration = false;
     this.loadingInterface = false;
     this.loadingServiceKeys = false;
@@ -40,9 +42,8 @@ export default class CloudConnect {
     if (this.isPopConfigurationExists()) {
       return head(values(this.popConfiguration));
     }
-    else {
-      return null;
-    }
+
+    return null;
   }
 
   setPopConfiguration(configuration) {
@@ -85,8 +86,10 @@ export default class CloudConnect {
   }
 
   getActiveServiceKey() {
-    return find(this.getServiceKeys(), key =>
-      key.status === 'active' || key.status === 'doing');
+    return find(
+      this.getServiceKeys(),
+      (key) => key.status === 'active' || key.status === 'doing',
+    );
   }
 
   isLoadingPopConfiguration() {
@@ -112,7 +115,10 @@ export default class CloudConnect {
   }
 
   setDatacenterConfigurations(configuration) {
-    this.datacenterConfigurations.push(configuration);
+    this.datacenterConfigurations[
+      configuration.id
+    ] = new CloudConnectDatacenter(configuration);
+    this.datacenterConfigurationIds.push(configuration.id);
   }
 
   setLoadingDatacenters(loading) {

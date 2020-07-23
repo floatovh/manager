@@ -38,9 +38,12 @@ export default class CloudConnectOverviewCtrl {
 
   loadMessages() {
     this.CucCloudMessage.unSubscribe('cloud-connect.overview');
-    this.messageHandler = this.CucCloudMessage.subscribe('cloud-connect.overview', {
-      onMessage: () => this.refreshMessages(),
-    });
+    this.messageHandler = this.CucCloudMessage.subscribe(
+      'cloud-connect.overview',
+      {
+        onMessage: () => this.refreshMessages(),
+      },
+    );
   }
 
   refreshMessages() {
@@ -152,7 +155,7 @@ export default class CloudConnectOverviewCtrl {
     this.downloadingLoa = true;
     this.cloudConnectService
       .downloadLOA(this.cloudConnectId)
-      .then(url => this.$window.open(url, '_blank', 'noopener'))
+      .then((url) => this.$window.open(url, '_blank', 'noopener'))
       .catch((error) =>
         this.CucCloudMessage.error(
           this.$translate.instant('cloud_connect_loa_download_error', {

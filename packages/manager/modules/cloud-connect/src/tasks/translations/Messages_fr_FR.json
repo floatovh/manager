@@ -1,0 +1,13 @@
+{
+  "cloud_connect_tasks_decription": "Vous pouvez afficher la liste des tâches",
+  "cloud_connect_tasks_id": "ID Tâche",
+  "cloud_connect_tasks_action": "Action",
+  "cloud_connect_TASKS_lockInterface": "Interface de verrouillage",
+  "cloud_connect_TASKS_unlockInterface": "Déverrouiller l'interface",
+  "cloud_connect_TASKS_addPopConfiguration": "Ajouter une configuration pop",
+  "cloud_connect_TASKS_delPopConfiguration": "Supprimer la configuration pop",
+  "cloud_connect_TASKS_addDatacenterConfiguration": "Ajouter la configuration du centre de données",
+  "cloud_connect_TASKS_delDatacenterConfiguration": "Supprimer la configuration du centre de données",
+  "cloud_connect_TASKS_addDatacenterExtraConfiguration": "Ajouter une configuration supplémentaire au centre de données",
+  "cloud_connect_TASKS_delDatacenterExtraConfiguration": "Supprimer la configuration supplémentaire du centre de données"
+}

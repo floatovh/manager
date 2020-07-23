@@ -6,4 +6,32 @@
 
     <h2 data-translate="cloud_connect_tasks"></h2>
     <p data-translate="cloud_connect_tasks_decription"></p>
+    <oui-datagrid data-rows="$ctrl.taskList">
+        <oui-column
+            data-title=":: 'cloud_connect_tasks_id' | translate"
+            data-property="id"
+        >
+        </oui-column>
+        <oui-column
+            data-title=":: 'cloud_connect_tasks_action' | translate"
+            data-property="function"
+        >
+            <span
+                data-translate="{{:: 'cloud_connect_TASKS_' + $row.function }}"
+            ></span>
+        </oui-column>
+        <oui-column
+            data-title=":: 'cloud_connect_common_status' | translate"
+            data-property="status"
+        >
+            <span
+                class="oui-status"
+                data-ng-class="{
+            'oui-status_error': $row.status === 'error',
+            'oui-status_success': $row.status === 'done'
+        }"
+                data-ng-bind="'cloud_connect_status_' +  $row.status | translate"
+            ></span>
+        </oui-column>
+    </oui-datagrid>
 </div>

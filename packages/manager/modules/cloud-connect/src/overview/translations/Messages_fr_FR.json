@@ -29,6 +29,7 @@
   "cloud_connect_status_closed": "Fermé",
   "cloud_connect_common_cancel": "Annuler",
   "cloud_connect_common_confirm": "Confirmer",
+  "cloud_connect_common_status": "Statut",
   "cloud_connect_common_create": "Créer",
   "cloud_connect_status_init": "Init",
   "cloud_connect_common_m": "Mo",

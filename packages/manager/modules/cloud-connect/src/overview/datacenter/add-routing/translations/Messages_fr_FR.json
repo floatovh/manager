@@ -5,5 +5,11 @@
   "cloud_connect_datacenter_add_routing_select_placeholder": "Sélectionnez",
   "cloud_connect_datacenter_add_routing_select_asn": "Saisissez l'ASN OVH",
   "cloud_connect_datacenter_add_routing_network_neighbor": "Saisissez l'adresse IP Neighbor",
-  "cloud_connect_datacenter_add_routing_network_neighbor_placeholder": "IP Neighbor"
+  "cloud_connect_datacenter_add_routing_network_neighbor_placeholder": "IP Neighbor",
+  "cloud_connect_datacenter_add_routing_nexthop": "Next hop",
+  "cloud_connect_datacenter_add_routing_nexthop_placeholder": "IP",
+  "cloud_connect_datacenter_add_routing_subnet": "Subnet",
+  "cloud_connect_datacenter_add_routing_subnet_placeholder": "IP",
+  "cloud_connect_datacenter_add_routing_bgp_area": "BGP Area",
+  "cloud_connect_datacenter_add_routing_bgp_ip": "BGP IP"
 }

@@ -5,6 +5,7 @@ export default {
   bindings: {
     cloudConnect: '<',
     cloudConnectId: '<',
+    taskList: '<',
   },
   controller,
   template,

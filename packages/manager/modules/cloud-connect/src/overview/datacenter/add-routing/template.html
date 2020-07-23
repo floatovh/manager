@@ -27,12 +27,13 @@
         </oui-field>
         <oui-field
             data-size="m"
-            data-label="{{::'cloud_connect_datacenter_add_routing_select_asn' | translate}}"
+            data-ng-if="$ctrl.type.id === 'bgp'"
+            data-label="{{::'cloud_connect_datacenter_add_routing_bgp_area' | translate}}"
         >
             <input
                 type="number"
-                id="asn"
-                name="asn"
+                id="bgpNeighborArea"
+                name="bgpNeighborArea"
                 class="oui-input"
                 data-ng-model="$ctrl.bgpNeighborArea"
                 required
@@ -40,15 +41,45 @@
         </oui-field>
         <oui-field
             data-size="m"
-            data-label="{{::'cloud_connect_datacenter_add_routing_network_neighbor' | translate}}"
+            data-ng-if="$ctrl.type.id === 'bgp'"
+            data-label="{{::'cloud_connect_datacenter_add_routing_bgp_ip' | translate}}"
         >
             <input
                 type="text"
-                id="asn"
-                name="asn"
+                id="bgpNeighborIp"
+                name="bgpNeighborIp"
+                class="oui-input"
+                data-ng-model="$ctrl.bgpNeighborIp"
+                required
+            />
+        </oui-field>
+        <oui-field
+            data-size="m"
+            data-ng-if="$ctrl.type.id === 'network'"
+            data-label="{{::'cloud_connect_datacenter_add_routing_nexthop' | translate}}"
+        >
+            <input
+                type="text"
+                id="nexthop"
+                name="nexthop"
+                class="oui-input"
+                data-ng-model="$ctrl.nextHop"
+                data-placeholder="{{:: 'cloud_connect_datacenter_add_routing_nexthop_placeholder' | translate }}"
+                required
+            />
+        </oui-field>
+        <oui-field
+            data-ng-if="$ctrl.type.id === 'network'"
+            data-size="m"
+            data-label="{{::'cloud_connect_datacenter_add_routing_subnet' | translate}}"
+        >
+            <input
+                type="text"
+                id="subnet"
+                name="subnet"
                 class="oui-input"
                 data-ng-model="$ctrl.subnet"
-                data-placeholder="{{:: 'cloud_connect_datacenter_add_routing_network_neighbor_placeholder' | translate }}"
+                data-placeholder="{{:: 'cloud_connect_datacenter_add_routing_subnet_placeholder' | translate }}"
                 required
             />
         </oui-field>

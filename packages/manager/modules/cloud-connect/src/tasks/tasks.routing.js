@@ -6,5 +6,9 @@ export default /* @ngInject */ ($stateProvider) => {
       value: ['.'],
       format: 'json',
     },
+    resolve: {
+      taskList: /* @ngInject */ (cloudConnectService, cloudConnectId) =>
+        cloudConnectService.loadAllTasks(cloudConnectId),
+    },
   });
 };

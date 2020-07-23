@@ -15,20 +15,27 @@ export default class CloudConnectEditDescriptionCtrl {
     return this.cloudConnectService
       .createDatacenterExtra(this.cloudConnect, this.datacenterId, {
         bgpNeighborArea: this.bgpNeighborArea,
+        bgpNeighborIp: this.bgpNeighborIp,
+        nextHop: this.nextHop,
         subnet: this.subnet,
         type: this.type.id,
       })
       .then(() => {
         return this.goBack(
-          this.$translate.instant('cloud_connect_datacenter_add_success'),
+          this.$translate.instant(
+            'cloud_connect_datacenter_add_routing_success',
+          ),
           'success',
         );
       })
       .catch((error) =>
         this.goBack(
-          this.$translate.instant('cloud_connect_datacenter_add_error', {
-            message: get(error, 'data.message', error.message),
-          }),
+          this.$translate.instant(
+            'cloud_connect_datacenter_add_routing_error',
+            {
+              message: get(error, 'data.message', error.message),
+            },
+          ),
           'error',
         ),
       )

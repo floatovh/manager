@@ -78,8 +78,7 @@
                             class="oui-button oui-button_link d-block pl-0"
                             data-ng-click="$ctrl.goToAssociateVrackPage()"
                         >
-                            {{ ::'cloud_connect_vrack_associate' | translate
-                            }}
+                            {{ ::'cloud_connect_vrack_associate' | translate }}
                         </button>
                     </oui-tile-description>
                     <oui-tile-description
@@ -136,7 +135,8 @@
                 <oui-tile-definition
                     data-ng-if="!$ctrl.cloudConnect.isDirectService()"
                     data-term="{{ ::'cloud_connect_provider' | translate }}"
-                    data-description="{{ ::$ctrl.cloudConnect.provider }}">
+                    data-description="{{ ::$ctrl.cloudConnect.provider }}"
+                >
                     <!-- <oui-action-menu
                         data-compact
                         data-align="end"
@@ -158,24 +158,33 @@
                 <!-- service keys -->
                 <oui-tile-definition
                     data-ng-if="!$ctrl.cloudConnect.isDirectService()"
-                    data-term="{{ ::'cloud_connect_service_key_active' | translate }}">
-                    <oui-tile-description data-ng-if="$ctrl.cloudConnect.isLoadingServiceKeys()">
+                    data-term="{{ ::'cloud_connect_service_key_active' | translate }}"
+                >
+                    <oui-tile-description
+                        data-ng-if="$ctrl.cloudConnect.isLoadingServiceKeys()"
+                    >
                         <oui-spinner data-size="s"></oui-spinner>
                     </oui-tile-description>
                     <oui-tile-description
                         data-ng-if="!$ctrl.cloudConnect.isLoadingServiceKeys()"
-                        data-ng-init="activeKey = $ctrl.cloudConnect.getActiveServiceKey()">
+                        data-ng-init="activeKey = $ctrl.cloudConnect.getActiveServiceKey()"
+                    >
                         <oui-clipboard
                             data-ng-if="activeKey"
-                            data-model="activeKey.key">
+                            data-model="activeKey.key"
+                        >
                         </oui-clipboard>
-                        <span data-ng-if="!activeKey" data-translate="cloud_connect_service_key_active_not_found"></span>
+                        <span
+                            data-ng-if="!activeKey"
+                            data-translate="cloud_connect_service_key_active_not_found"
+                        ></span>
                     </oui-tile-description>
                     <oui-action-menu
                         data-ng-if="!$ctrl.cloudConnect.isLoadingServiceKeys()"
                         data-compact
                         data-align="end"
-                        data-ng-init="activeKey = $ctrl.cloudConnect.getActiveServiceKey()">
+                        data-ng-init="activeKey = $ctrl.cloudConnect.getActiveServiceKey()"
+                    >
                         <oui-action-menu-item
                             data-ng-disabled="!activeKey"
                             data-on-click="$ctrl.goToSendServiceKeyPage()"
@@ -390,6 +399,7 @@
                         data-translate="cloud_connect_dc_title"
                     ></h4>
                     <oui-action-menu
+                        data-ng-if="$ctrl.cloudConnect.datacenterConfigurationIds.length > 0"
                         data-compact
                         data-align="end"
                         class="ml-auto"
@@ -401,11 +411,10 @@
                     </oui-action-menu>
                 </div>
                 <oui-tile-definition
-                    data-ng-if="!$ctrl.cloudConnect.isPopConfigured(interfaceId)"
+                    data-ng-if="$ctrl.cloudConnect.datacenterConfigurationIds.length === 0"
                 >
                     <oui-tile-description>
                         <oui-button
-                            data-ng-if="$ctrl.cloudConnect.datacenterConfigurations.length < 1"
                             data-variant="primary"
                             data-text="{{ ::'cloud_connect_dc_add_button' | translate }}"
                             data-ng-click="$ctrl.goToDatacenterAdd($ctrl.cloudConnect)"
@@ -413,7 +422,7 @@
                         </oui-button>
                     </oui-tile-description>
                 </oui-tile-definition>
-                <!-- if datacenter is configure repeat this per configuration -->
+                <!-- Datacenter configurations -->
                 <div
                     class="oui-tile mb-3"
                     data-ng-repeat="configuration in $ctrl.cloudConnect.datacenterConfigurations track by $index"
@@ -472,8 +481,8 @@
                                         <span
                                             class="oui-status"
                                             data-ng-class="{
-                                            'oui-status_error': configuration.status === 'closed' || configuration.status === 'toDelete' ,
-                                            'oui-status_success': configuration.status === 'active'
+                                            'oui-status_error': configuration.isDelete(),
+                                            'oui-status_success': configuration.isActive()
                                         }"
                                             data-ng-bind="'cloud_connect_status_' +  configuration.status | translate"
                                         ></span>
@@ -494,7 +503,7 @@
                                         data-on-click="$ctrl.goToDatacenterAddRouting(configuration.id)"
                                     ></oui-action-menu-item>
                                     <oui-action-menu-item
-                                        data-ng-if="configuration.status !== 'toDelete'"
+                                        data-ng-if="configuration.isActive()"
                                         data-text="{{ ::'cloud_connect_delete' | translate }}"
                                         data-on-click="$ctrl.goToRemoveDatacenterConfiguration(configuration.id)"
                                     ></oui-action-menu-item>

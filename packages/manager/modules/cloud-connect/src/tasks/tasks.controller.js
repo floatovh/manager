@@ -6,15 +6,14 @@ export default class CloudConnectTasksCtrl {
     this.cloudConnectService = cloudConnectService;
   }
 
-  $onInit() {
-    this.loadMessages();
-  }
-
   loadMessages() {
     this.CucCloudMessage.unSubscribe('cloud-connect.tasks');
-    this.messageHandler = this.CucCloudMessage.subscribe('cloud-connect.tasks', {
-      onMessage: () => this.refreshMessages(),
-    });
+    this.messageHandler = this.CucCloudMessage.subscribe(
+      'cloud-connect.tasks',
+      {
+        onMessage: () => this.refreshMessages(),
+      },
+    );
   }
 
   refreshMessages() {
