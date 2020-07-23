@@ -17,20 +17,21 @@
             data-property="function"
         >
             <span
-                data-translate="{{:: 'cloud_connect_TASKS_' + $row.function }}"
+                data-translate="{{:: 'cloud_connect_tasks_' + $row.function }}"
             ></span>
         </oui-column>
         <oui-column
-            data-title=":: 'cloud_connect_common_status' | translate"
+            data-title=":: 'cloud_connect_tasks_status' | translate"
             data-property="status"
         >
             <span
                 class="oui-status"
                 data-ng-class="{
-            'oui-status_error': $row.status === 'error',
-            'oui-status_success': $row.status === 'done'
-        }"
-                data-ng-bind="'cloud_connect_common_' +  $row.status | translate"
+                    'oui-status_error': $row.status === 'error',
+                    'oui-status_success': $row.status === 'done',
+                    'oui-status_info': $row.status === 'todo' || $row.status === 'doing',
+                }"
+                data-ng-bind="'cloud_connect_tasks_status_' +  $row.status | translate"
             ></span>
         </oui-column>
     </oui-datagrid>
